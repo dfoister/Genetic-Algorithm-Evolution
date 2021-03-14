@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\src\Core\arch\SSE\</FILEPATH>
+      <FILENAME>Complex.h</FILENAME>
+      <LINE>20</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Eigen::internal::Packet2cf::v' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Eigen::internal::Packet2cf::{ctor}</FUNCTION>
+    <DECORATED>??0Packet2cf@internal@Eigen@@QAE@XZ</DECORATED>
+    <FUNCLINE>20</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Eigen::internal::Packet2cf::v</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\src\Core\arch\SSE\</FILEPATH>
+      <FILENAME>Complex.h</FILENAME>
+      <LINE>251</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Eigen::internal::Packet1cd::v' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Eigen::internal::Packet1cd::{ctor}</FUNCTION>
+    <DECORATED>??0Packet1cd@internal@Eigen@@QAE@XZ</DECORATED>
+    <FUNCLINE>251</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Eigen::internal::Packet1cd::v</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\src\Core\arch\CUDA\</FILEPATH>
+      <FILENAME>Half.h</FILENAME>
+      <LINE>388</LINE>
+      <COLUMN>39</COLUMN>
+    </SFA>
+    <DEFECTCODE>26450</DEFECTCODE>
+    <DESCRIPTION>Arithmetic overflow: '&lt;&lt;' operation causes overflow at compile time. Use a wider type to store the operands (io.1).</DESCRIPTION>
+    <FUNCTION>Eigen::half_impl::float_to_half_rtne</FUNCTION>
+    <DECORATED>?float_to_half_rtne@half_impl@Eigen@@YA?AU__half_raw@12@M@Z</DECORATED>
+    <FUNCLINE>345</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\src\Core\products\</FILEPATH>
+      <FILENAME>GeneralBlockPanelKernel.h</FILENAME>
+      <LINE>55</LINE>
+      <COLUMN>12</COLUMN>
+    </SFA>
+    <DEFECTCODE>26812</DEFECTCODE>
+    <DESCRIPTION>The enum type 'Eigen::Action' is unscoped. Prefer 'enum class' over 'enum' (Enum.3).</DESCRIPTION>
+    <FUNCTION>Eigen::internal::manage_caching_sizes</FUNCTION>
+    <DECORATED>?manage_caching_sizes@internal@Eigen@@YAXW4Action@2@PAH11@Z</DECORATED>
+    <FUNCLINE>55</FUNCLINE>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\</FILEPATH>
+      <FILENAME>RigidBody.cpp</FILENAME>
+      <LINE>3</LINE>
+      <COLUMN>11</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'RigidBody::spring' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>RigidBody::{ctor}</FUNCTION>
+    <DECORATED>??0RigidBody@@QAE@XZ</DECORATED>
+    <FUNCLINE>3</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>RigidBody::spring</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\src\Core\</FILEPATH>
+      <FILENAME>DenseStorage.h</FILENAME>
+      <LINE>49</LINE>
+      <COLUMN>2</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>Variable 'Eigen::internal::plain_array&lt;float,2,0,0&gt;::array' is uninitialized. Always initialize a member variable (type.6).</DESCRIPTION>
+    <FUNCTION>Eigen::internal::plain_array&lt;float,2,0,0&gt;::{ctor}</FUNCTION>
+    <DECORATED>??0?$plain_array@M$01$0A@$0A@@internal@Eigen@@QAE@XZ</DECORATED>
+    <FUNCLINE>49</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>Eigen::internal::plain_array&lt;float,2,0,0&gt;::array</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>
