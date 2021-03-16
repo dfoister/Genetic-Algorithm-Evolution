@@ -154,6 +154,7 @@
     <ClInclude Include="Bodies\Organism.h" />
     <ClInclude Include="Bodies\Food.h" />
     <ClInclude Include="EvolutionSimulation.h" />
+    <ClInclude Include="Graphics\theWindow.h" />
     <ClInclude Include="Physics\BasicVector2Operations.h" />
     <ClInclude Include="Physics\CollisionBounds.h" />
     <ClInclude Include="Physics\CollisionPair.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="Physics\SimPhysics.h" />
     <ClInclude Include="Bodies\Wall.h" />
     <ClInclude Include="Bodies\Poison.h" />
+    <ClInclude Include="Graphics\Rendering.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bodies\BaseObject.cpp" />
@@ -175,6 +177,7 @@
     <ClCompile Include="Physics\SimPhysics.cpp" />
     <ClCompile Include="Bodies\Wall.cpp" />
     <ClCompile Include="Bodies\Poison.cpp" />
+    <ClCompile Include="Graphics\Rendering.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

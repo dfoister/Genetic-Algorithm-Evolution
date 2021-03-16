@@ -2,7 +2,7 @@
 
 Food::Food()
 {
-	collider = new CollisionBounds(CollisionBounds::Shapes::CIRCLE, CollisionBounds::Types::FOOD, 6.0f);
+	collider = new CollisionBounds(CollisionBounds::Shapes::CIRCLE, CollisionBounds::Types::FOOD, 50.0f);
 }
 
 Food::~Food()

@@ -1,42 +1,36 @@
 #include "EvolutionSimulation.h"
-#include <Graphics.hpp>
-#include <vector>
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1280, 720), "bonk!");;
-	window.setFramerateLimit(30);
+	Rendering* r = new Rendering();
+
+	r->window.create(sf::VideoMode(1280, 720), "bonk!");
+	r->window.setFramerateLimit(30);
 	
 	sf::Clock clock;
 
-	unsigned int windowWidth = window.getSize().x;
-	unsigned int windowHeight = window.getSize().y;
-
-	EvolutionSimulation* sim = new EvolutionSimulation();
+	EvolutionSimulation* sim = new EvolutionSimulation(r);
 
 	clock.restart();
 
-	while (window.isOpen())
+	while (r->window.isOpen())
 	{
 
 		sf::Time elapsed = clock.restart();
 		if (elapsed.asSeconds() > 1.5f) continue;
-		sim->update(elapsed.asSeconds());
-		
-
-
 
 		sf::Event event;
-		while (window.pollEvent(event))
+		while (r->window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-				window.close();
+				r->window.close();
 		}
 
+		
 
-
-		window.clear(sf::Color::White);
-		window.display();
+		r->window.clear(sf::Color::White);
+		sim->update(elapsed.asSeconds());
+		r->window.display();
 	}
 
 	return 0;

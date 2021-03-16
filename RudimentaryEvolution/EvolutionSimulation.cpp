@@ -5,10 +5,15 @@
 #include "Bodies/Wall.h"
 #include "Bodies/Organism.h"
 #include "Bodies/Poison.h"
+#include <iostream>
 
-EvolutionSimulation::EvolutionSimulation()
+EvolutionSimulation::EvolutionSimulation(Rendering* r)
 {
 	physics = new SimPhysics();
+	this->renderer = r;
+	gameTime = 0.0f;
+	InitialiseGame();
+	CreateWallColliders();
 }
 
 EvolutionSimulation::~EvolutionSimulation()
@@ -28,15 +33,22 @@ void EvolutionSimulation::addNewObject(BaseObject* object)
 
 void EvolutionSimulation::update(float dt)
 {
+
 	for (auto i : newObjects) {
 		gameObjects.emplace_back(i);
 	}
 	newObjects.clear();
 
+
+	//renderer->DrawCircle(sf::Vector2f(100, 100), 50.0f, sf::Color::Green);
+
 	gameTime += dt;
 	physics->update(dt);
 
-	srand((int)(gameTime * 1000.0f));
+
+	std::cout << "BBBBBBBBBBBBBBB";
+	//srand((int)(gameTime * 1000.0f));
+
 	for (auto i = gameObjects.begin(); i != gameObjects.end(); ) {
 		if (!(*i)->updateObject(dt)) { //object has said its finished with
 			physics->removeCollider((*i)->getCollider());
@@ -46,20 +58,20 @@ void EvolutionSimulation::update(float dt)
 		}
 		else {
 			CollisionBounds* col = (*i)->getCollider();
-			
-			/*
+			std::cout << "AAAAAAAA";
 			if (col) {
-
+				std::cout << "EEEEEEEEE";
 				/// DRAWS ALL COLLIDER BOXES
 				if (col->getShape() == CollisionBounds::Shapes::CIRCLE) {
-					//renderer->DrawCircle(col->getPosition(), col->getRadius(), Vector4f(1, 0, 1, 1));
+					std::cout << "Hi";
+					renderer->DrawCircle(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getRadius(), sf::Color::Blue);
 				}
 				else {
-					//renderer->DrawBox(col->getPosition(), Vector2(col->getWidth() / 2, col->getHeight() / 2), Vector4(0, 0, 1, 1));
+					renderer->DrawBox(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getWidth(), col->getHeight() / 2, sf::Color::Green);
 				}
 				
 			}
-			*/
+			
 
 			++i;
 		}
@@ -72,6 +84,12 @@ void EvolutionSimulation::InitialiseGame()
 		delete o;
 	}
 	gameObjects.clear();
+
+	Food* foodthing = new Food();
+	foodthing->setPos(Eigen::Vector2f(640, 360));
+	foodthing->updateCollider();
+	addNewObject(foodthing);
+	
 
 	Organism* organisms[20];
 	Food* food[20];
