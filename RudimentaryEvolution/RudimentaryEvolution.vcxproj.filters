@@ -15,36 +15,75 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CollisionBounds.h">
+    <ClInclude Include="Physics\BasicVector2Operations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RigidBody.h">
+    <ClInclude Include="Physics\CollisionBounds.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BasicVector2Operations.h">
+    <ClInclude Include="Physics\CollisionPair.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SimPhysics.h">
+    <ClInclude Include="Physics\RigidBody.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionPair.h">
+    <ClInclude Include="Physics\SimPhysics.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bodies\Wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bodies\Organism.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bodies\Food.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bodies\Poison.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EvolutionSimulation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bodies\BaseObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CollisionBounds.cpp">
+    <ClCompile Include="Physics\BasicVector2Operations.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RigidBody.cpp">
+    <ClCompile Include="Physics\CollisionBounds.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BasicVector2Operations.cpp">
+    <ClCompile Include="Physics\CollisionPair.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SimPhysics.cpp">
+    <ClCompile Include="Physics\RigidBody.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionPair.cpp">
+    <ClCompile Include="Physics\SimPhysics.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bodies\Wall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bodies\Organism.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bodies\Food.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bodies\Poison.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bodies\BaseObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EvolutionSimulation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

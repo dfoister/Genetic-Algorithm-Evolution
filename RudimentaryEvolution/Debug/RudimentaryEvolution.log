@@ -1,12 +1,86 @@
-﻿  BasicVector2Operations.cpp
+﻿  BaseObject.cpp
+  Organism.cpp
+  Food.cpp
+  EvolutionSimulation.cpp
+  main.cpp
+  BasicVector2Operations.cpp
   CollisionBounds.cpp
-C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\CollisionBounds.cpp(72,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Physics\CollisionBounds.cpp(68,20): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   CollisionPair.cpp
   RigidBody.cpp
   SimPhysics.cpp
-C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\SimPhysics.cpp(66,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\SimPhysics.cpp(67,25): warning C4018: '<': signed/unsigned mismatch
-  Running Code Analysis for C/C++...
+C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Physics\SimPhysics.cpp(72,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Physics\SimPhysics.cpp(73,25): warning C4018: '<': signed/unsigned mismatch
+  Wall.cpp
+  Poison.cpp
   Generating Code...
-MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol _main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
-C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Debug\RudimentaryEvolution.exe : fatal error LNK1120: 1 unresolved externals
+sfml-graphics-s.lib(Color.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(Color.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(Shape.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(Shape.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(CircleShape.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(CircleShape.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(RenderTarget.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(RenderTarget.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(RenderWindow.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(RenderWindow.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(RenderStates.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(RenderStates.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(Transform.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(Transform.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(Transformable.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(Transformable.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(VertexArray.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(VertexArray.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(Texture.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(Texture.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(View.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(View.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(Shader.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(Shader.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(VertexBuffer.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(VertexBuffer.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(GLExtensions.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(GLExtensions.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(RenderTextureImplFBO.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(RenderTextureImplFBO.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(Image.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(Image.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(Glsl.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(Glsl.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-graphics-s.lib(ImageLoader.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-graphics-s.lib(ImageLoader.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-system-s.lib(String.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-system-s.lib(String.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-system-s.lib(Err.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-system-s.lib(Err.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(VideoMode.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(VideoMode.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(Window.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(Window.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(VideoModeImpl.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(VideoModeImpl.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(GlContext.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(GlContext.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(WindowImpl.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(WindowImpl.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(CursorImpl.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(CursorImpl.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(WglContext.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(WglContext.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(JoystickManager.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(JoystickManager.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(SensorManager.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(SensorManager.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(WindowImplWin32.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(WindowImplWin32.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(WglExtensions.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(WglExtensions.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(Joystick.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(Joystick.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+sfml-window-s.lib(JoystickImpl.cpp.obj) : error LNK2038: mismatch detected for '_ITERATOR_DEBUG_LEVEL': value '0' doesn't match value '2' in BaseObject.obj
+sfml-window-s.lib(JoystickImpl.cpp.obj) : error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MD_DynamicRelease' doesn't match value 'MDd_DynamicDebug' in BaseObject.obj
+LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
+CollisionBounds.obj : error LNK2019: unresolved external symbol "public: float __thiscall CollisionBounds::vectorLength(class Eigen::Matrix<float,2,1,0,2,1>)" (?vectorLength@CollisionBounds@@QAEMV?$Matrix@M$01$00$0A@$01$00@Eigen@@@Z) referenced in function "public: class std::tuple<bool,float,class Eigen::Matrix<float,2,1,0,2,1> > __thiscall CollisionBounds::isCollided(class CollisionBounds *)" (?isCollided@CollisionBounds@@QAE?AV?$tuple@_NMV?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@PAV1@@Z)
+CollisionBounds.obj : error LNK2019: unresolved external symbol "public: class Eigen::Matrix<float,2,1,0,2,1> __thiscall CollisionBounds::normalizedVec(class Eigen::Matrix<float,2,1,0,2,1>)" (?normalizedVec@CollisionBounds@@QAE?AV?$Matrix@M$01$00$0A@$01$00@Eigen@@V23@@Z) referenced in function "public: class std::tuple<bool,float,class Eigen::Matrix<float,2,1,0,2,1> > __thiscall CollisionBounds::isCollided(class CollisionBounds *)" (?isCollided@CollisionBounds@@QAE?AV?$tuple@_NMV?$Matrix@M$01$00$0A@$01$00@Eigen@@@std@@PAV1@@Z)
+C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Debug\RudimentaryEvolution.exe : fatal error LNK1120: 2 unresolved externals
