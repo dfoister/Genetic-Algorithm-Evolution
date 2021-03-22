@@ -1,11 +1,10 @@
 #include <vector>
-
 #include "RigidBody.h"
 
 using namespace Eigen;
 
 class RigidBody;
-class CollisionBounds;
+class Collider;
 class CollisionPair;
 class SimPhysics
 {
@@ -16,8 +15,8 @@ public:
 	void addBody(RigidBody* b);
 	void removeBody(RigidBody* b);
 
-	void addCollider(CollisionBounds* c);
-	void removeCollider(CollisionBounds* c);
+	void addCollider(Collider* c);
+	void removeCollider(Collider* c);
 
 	void update(float dt);
 
@@ -29,8 +28,8 @@ protected:
 	void collisionResolution(float dt);
 	void integrateVel(float dt);
 
-	std::vector<RigidBody*> allBodies;
-	std::vector<CollisionBounds*> allColliders;
-	std::vector<CollisionPair*> collisionList;
+	std::vector<RigidBody*> allBodies_;
+	std::vector<Collider*> allColliders_;
+	std::vector<CollisionPair*> collisionList_;
 };
 

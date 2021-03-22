@@ -2,9 +2,10 @@
 #define BASEOBJECT_H_GUARD
 
 #include "../Physics/RigidBody.h"
+#include <random>
 class EvolutionSimulation;
 class RigidBody;
-class CollisionBounds;
+class Collider;
 
 class BaseObject : public RigidBody
 {
@@ -12,25 +13,23 @@ public:
 	BaseObject();
 	~BaseObject();
 
-	void setCollider(CollisionBounds* c) {
-		collider = c;
+	void setCollider(Collider* c) {
+		collider_ = c;
 	}
 
-	CollisionBounds* getCollider() const {
-		return collider;
+	Collider* getCollider() const {
+		return collider_;
 	}
 
 	void updateCollider() {
-		this->collider->setPosition(this->pos);
+		this->collider_->setPosition(this->pos_);
 	}
 
 	virtual bool updateObject(float dt) = 0;
 
-
-
 protected:
 
-	CollisionBounds* collider;
+	Collider* collider_;
 };
 
 #endif

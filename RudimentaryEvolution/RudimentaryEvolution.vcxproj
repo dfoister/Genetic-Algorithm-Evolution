@@ -153,10 +153,11 @@
     <ClInclude Include="Bodies\BaseObject.h" />
     <ClInclude Include="Bodies\Organism.h" />
     <ClInclude Include="Bodies\Food.h" />
+    <ClInclude Include="Constants.h" />
     <ClInclude Include="EvolutionSimulation.h" />
-    <ClInclude Include="Graphics\theWindow.h" />
-    <ClInclude Include="Physics\BasicVector2Operations.h" />
-    <ClInclude Include="Physics\CollisionBounds.h" />
+    <ClInclude Include="GeneticAlgorithm.h" />
+    <ClInclude Include="Physics\Vec2Operations.h" />
+    <ClInclude Include="Physics\Collider.h" />
     <ClInclude Include="Physics\CollisionPair.h" />
     <ClInclude Include="Physics\RigidBody.h" />
     <ClInclude Include="Physics\SimPhysics.h" />
@@ -169,9 +170,9 @@
     <ClCompile Include="Bodies\Organism.cpp" />
     <ClCompile Include="Bodies\Food.cpp" />
     <ClCompile Include="EvolutionSimulation.cpp" />
+    <ClCompile Include="GeneticAlgorithm.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Physics\BasicVector2Operations.cpp" />
-    <ClCompile Include="Physics\CollisionBounds.cpp" />
+    <ClCompile Include="Physics\Collider.cpp" />
     <ClCompile Include="Physics\CollisionPair.cpp" />
     <ClCompile Include="Physics\RigidBody.cpp" />
     <ClCompile Include="Physics\SimPhysics.cpp" />

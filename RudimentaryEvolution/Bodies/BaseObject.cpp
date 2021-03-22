@@ -2,10 +2,10 @@
 
 BaseObject::BaseObject()
 {
-	collider = nullptr;
+	collider_ = nullptr;
 }
 
 BaseObject::~BaseObject()
 {
-	delete(collider);
+	delete(collider_);
 }

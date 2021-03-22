@@ -32,3 +32,31 @@ void Rendering::DrawBox(sf::Vector2f pos, float width, float height, sf::Color c
 
 	window.draw(rect);
 }
+
+void Rendering::DrawOrganism(sf::Vector2f pos, float radius, sf::Color colour)
+{
+	sf::CircleShape o(radius);
+
+	o.setPosition(pos);
+	o.setOrigin(sf::Vector2f(radius, radius));
+	o.setOutlineColor(colour);
+	o.setOutlineThickness(2);
+	o.setFillColor(sf::Color(192, 192, 192));
+
+	window.draw(o);
+
+}
+
+void Rendering::DrawHealth(sf::Vector2f pos, float health)
+{
+	sf::Text t;
+	sf::Font f;
+	f.loadFromFile("Textures/ArialCE.ttf");
+	t.setFont(f);
+	t.setCharacterSize(15);
+	t.setString(std::to_string(health));
+	t.setPosition(sf::Vector2f(pos.x -25, pos.y - 25));
+	t.setFillColor(sf::Color::Black);
+
+	window.draw(t);
+}

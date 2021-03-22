@@ -13,56 +13,75 @@ public:
 	~RigidBody();
 
 	void setPos(const Vector2f& newPos) {
-		pos = newPos;
+		pos_ = newPos;
 	}
 
 	void setVel(const Vector2f& newVel) {
-		vel = newVel;
+		vel_ = newVel;
 	}
 
 	void setSpring(RigidBody* body) {
-		this->spring = body;
+		this->spring_ = body;
 	}
 
 	void addForce(const Vector2f& newForce) {
-		force += newForce;
+		force_ += newForce;
 	}
 
 	void addImpulse(const Vector2f& newImpulse) {
-		vel += newImpulse * inverseMass;
+		vel_ += newImpulse * inverseMass_;
 	}
 
 	Vector2f getPos() const {
-		return pos;
+		return pos_;
 	}
 
 	Vector2f getVel() const {
-		return vel;
+		return vel_;
+	}
+
+	float getHealth() {
+		return currentHealth_;
 	}
 
 	void updateSprings() {
 		const float c = 1;
 		const float snappiness = 1;
-		Vector2f delta = this->getPos() - spring->getPos();
+		Vector2f delta = this->getPos() - spring_->getPos();
 
 		Vector2f normal = BasicVector2Operations::normalized(delta);
 
 		float force = -snappiness * (BasicVector2Operations::length(delta) - 10);
-		float relativeVelocity = (spring->getVel() - this->getVel()).dot(normal);
+		float relativeVelocity = (spring_->getVel() - this->getVel()).dot(normal);
 		float forceDampened = force - c * relativeVelocity;
 		this->addForce(normal * forceDampened);
 	}
 
+	void consumedFoodPoison(std::string type) {
+
+			if (type == "FOOD") {
+				currentHealth_ += 25;
+			}
+			else {
+				currentHealth_ -= 40;
+			}
+
+	}
+
+
 
 
 protected:
-	Vector2f pos;
-	Vector2f vel;
-	Vector2f force;
-	float damp;
-	float inverseMass;
-	float elasticity;
-	RigidBody* spring;
+	Vector2f pos_;
+	Vector2f vel_;
+	Vector2f force_;
+	float damp_;
+	float inverseMass_;
+	float elasticity_;
+	RigidBody* spring_;
+
+	float currentHealth_;
+	bool isConsumed_; 
 };
 
 #endif

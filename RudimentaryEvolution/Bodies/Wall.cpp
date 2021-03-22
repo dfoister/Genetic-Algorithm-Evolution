@@ -3,13 +3,16 @@
 
 Wall::Wall()
 {
-	inverseMass = 0;
+	inverseMass_ = 0;
 }
 
-Wall::Wall(CollisionBounds* col, Vector2f position)
+Wall::Wall(Collider* col, Vector2f position)
 {
-	collider = col;
-	this->pos = position;
+
+	collider_ = col;
+	collider_->setColour(sf::Color::Black);
+	collider_->setObject(this);
+	this->pos_ = position;
 	updateCollider();
 }
 

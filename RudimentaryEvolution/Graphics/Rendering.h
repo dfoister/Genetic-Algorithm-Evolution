@@ -12,9 +12,7 @@ public:
 
 	void DrawCircle(sf::Vector2f pos, float radius, sf::Color colour);
 	void DrawBox(sf::Vector2f pos, float width, float height, sf::Color colour);
-
-protected:
-
-	std::vector<BaseObject*> allObjects;
+	void DrawOrganism(sf::Vector2f pos, float radius, sf::Color colour);
+	void DrawHealth(sf::Vector2f pos, float health);
 };
 

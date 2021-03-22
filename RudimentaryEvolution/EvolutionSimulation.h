@@ -17,12 +17,11 @@ protected:
 	void InitialiseGame();
 	void CreateWallColliders();
 
-	SimPhysics* physics;
-	Rendering* renderer;
-	float gameTime;
+	SimPhysics* physics_;
+	Rendering* renderer_;
+	float gameTime_;
 
-	std::vector<BaseObject*> gameObjects;
-	std::vector<BaseObject*> newObjects;
-	Rendering* r;
+	std::vector<BaseObject*> gameObjects_;
+	std::vector<BaseObject*> newObjects_;
 };
 

@@ -1,11 +1,12 @@
 #include "EvolutionSimulation.h"
+#include "Constants.h"
 
 int main()
 {
 	Rendering* r = new Rendering();
 
 	r->window.create(sf::VideoMode(1280, 720), "bonk!");
-	r->window.setFramerateLimit(30);
+	r->window.setFramerateLimit(constants::FRAMERATE_LIMIT);
 	
 	sf::Clock clock;
 
@@ -28,7 +29,7 @@ int main()
 
 		
 
-		r->window.clear(sf::Color::White);
+		r->window.clear(sf::Color(192,192,192));
 		sim->update(elapsed.asSeconds());
 		r->window.display();
 	}

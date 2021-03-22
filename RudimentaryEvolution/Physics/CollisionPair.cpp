@@ -3,42 +3,42 @@
 
 CollisionPair::CollisionPair()
 {
-	a = NULL;
-	b = NULL;
-	normal = Vector2f(0, 0);
-	penetration = 0;
+	a_ = NULL;
+	b_ = NULL;
+	normal_ = Vector2f(0, 0);
+	penetration_ = 0;
 }
 
-CollisionPair::CollisionPair(CollisionBounds* a, CollisionBounds* b, float penetration, Vector2f normal)
+CollisionPair::CollisionPair(Collider* a, Collider* b, float penetration, Vector2f normal)
 {
-	this->a = a;
-	this->b = b;
-	this->normal = normal;
-	this->penetration = penetration;
+	this->a_ = a;
+	this->b_ = b;
+	this->normal_ = normal;
+	this->penetration_ = penetration;
 }
 
 CollisionPair::~CollisionPair()
 {
 }
 
-CollisionBounds* CollisionPair::getCollisionA() const
+Collider* CollisionPair::getCollisionA() const
 {
-	return a;
+	return a_;
 }
 
 
 
-CollisionBounds* CollisionPair::getCollisionB() const
+Collider* CollisionPair::getCollisionB() const
 {
-	return b;
+	return b_;
 }
 
 float CollisionPair::getPenetration()
 {
-	return penetration;
+	return penetration_;
 }
 
 Vector2f CollisionPair::getNormal()
 {
-	return normal;
+	return normal_;
 }

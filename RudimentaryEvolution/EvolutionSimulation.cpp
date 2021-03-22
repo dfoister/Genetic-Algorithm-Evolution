@@ -5,13 +5,16 @@
 #include "Bodies/Wall.h"
 #include "Bodies/Organism.h"
 #include "Bodies/Poison.h"
+#include "Constants.h"
 #include <iostream>
+
+using namespace constants;
 
 EvolutionSimulation::EvolutionSimulation(Rendering* r)
 {
-	physics = new SimPhysics();
-	this->renderer = r;
-	gameTime = 0.0f;
+	physics_ = new SimPhysics();
+	renderer_ = r;
+	gameTime_ = 0.0f;
 	InitialiseGame();
 	CreateWallColliders();
 }
@@ -24,50 +27,50 @@ EvolutionSimulation::~EvolutionSimulation()
 
 void EvolutionSimulation::addNewObject(BaseObject* object)
 {
-	newObjects.emplace_back(object);
-	physics->addBody(object);
+	newObjects_.emplace_back(object);
+	physics_->addBody(object);
 	if (object->getCollider()) {
-		physics->addCollider(object->getCollider());
+		physics_->addCollider(object->getCollider());
 	}
 }
 
 void EvolutionSimulation::update(float dt)
 {
 
-	for (auto i : newObjects) {
-		gameObjects.emplace_back(i);
+	for (auto i : newObjects_) {
+		gameObjects_.emplace_back(i);
 	}
-	newObjects.clear();
+	newObjects_.clear();
 
 
-	//renderer->DrawCircle(sf::Vector2f(100, 100), 50.0f, sf::Color::Green);
+	//renderer_->DrawCircle(sf::Vector2f(100, 100), 50.0f, sf::Color::Green);
 
-	gameTime += dt;
-	physics->update(dt);
+	gameTime_ += dt;
+	physics_->update(dt);
 
 
-	std::cout << "BBBBBBBBBBBBBBB";
-	//srand((int)(gameTime * 1000.0f));
+	//srand((int)(gameTime_ * 1000.0f));
 
-	for (auto i = gameObjects.begin(); i != gameObjects.end(); ) {
+	for (auto i = gameObjects_.begin(); i != gameObjects_.end(); ) {
 		if (!(*i)->updateObject(dt)) { //object has said its finished with
-			physics->removeCollider((*i)->getCollider());
-			physics->removeBody((*i));
+			physics_->removeCollider((*i)->getCollider());
+			physics_->removeBody((*i));
 			delete (*i);
-			i = gameObjects.erase(i);
+			i = gameObjects_.erase(i);
 		}
 		else {
-			CollisionBounds* col = (*i)->getCollider();
-			std::cout << "AAAAAAAA";
+			Collider* col = (*i)->getCollider();
 			if (col) {
-				std::cout << "EEEEEEEEE";
 				/// DRAWS ALL COLLIDER BOXES
-				if (col->getShape() == CollisionBounds::Shapes::CIRCLE) {
-					std::cout << "Hi";
-					renderer->DrawCircle(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getRadius(), sf::Color::Blue);
+				if (col->getName() == "FOOD" || col->getName() == "POISON") {
+					renderer_->DrawCircle(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getRadius(), col->getColour());
+				}
+				else if(col->getName() == "ORGANISM"){
+					renderer_->DrawOrganism(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getRadius(), col->getColour());
+					renderer_->DrawHealth(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getObject()->getHealth());
 				}
 				else {
-					renderer->DrawBox(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getWidth(), col->getHeight() / 2, sf::Color::Green);
+					renderer_->DrawBox(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getWidth(), col->getHeight(), col->getColour());
 				}
 				
 			}
@@ -80,42 +83,53 @@ void EvolutionSimulation::update(float dt)
 
 void EvolutionSimulation::InitialiseGame()
 {
-	for (auto o : gameObjects) {
+	for (auto o : gameObjects_) {
 		delete o;
 	}
-	gameObjects.clear();
+	gameObjects_.clear();
 
-	Food* foodthing = new Food();
-	foodthing->setPos(Eigen::Vector2f(640, 360));
-	foodthing->updateCollider();
-	addNewObject(foodthing);
 	
 
-	Organism* organisms[20];
-	Food* food[20];
-	Poison* poison[15];
+	std::vector<Poison*> poison(NO_OF_POISON);
+	for (Poison* p : poison) {
+		p = new Poison();
+		addNewObject(p);
+	}
+	std::vector<Food*> food(NO_OF_FOOD);
+	for (Food* f : food) {
+		f = new Food();
+		addNewObject(f);
+	}
+
+	std::vector<Organism*> organisms(POPULATION_SIZE);
+	for (Organism* o : organisms) {
+		o = new Organism();
+		addNewObject(o);
+	}
+
+
 
 	CreateWallColliders();
 
-	gameTime = 0;
+	gameTime_ = 0;
 
 }
 
 void EvolutionSimulation::CreateWallColliders()
 {
-	CollisionBounds* leftWallC = new CollisionBounds(CollisionBounds::Shapes::BOX, CollisionBounds::Types::WALL, 5.0f, 720.0f);
-	Wall* leftWall = new Wall(leftWallC,Vector2f(2.5f,360.0f));
+	Collider* leftWallC = new Collider(Collider::Shapes::BOX, Collider::Types::WALL, 20.0f, 720.0f);
+	Wall* leftWall = new Wall(leftWallC,Vector2f(0.0f,360.0f));
 	addNewObject(leftWall);
 
-	CollisionBounds* rightWallC = new CollisionBounds(CollisionBounds::Shapes::BOX, CollisionBounds::Types::WALL, 5.0f, 720.0f);
-	Wall* rightWall = new Wall(rightWallC, Vector2f(1277.5f, 360.0f));
+	Collider* rightWallC = new Collider(Collider::Shapes::BOX, Collider::Types::WALL, 20.0f, 720.0f);
+	Wall* rightWall = new Wall(rightWallC, Vector2f(1280.0f, 360));
 	addNewObject(rightWall);
 
-	CollisionBounds* topWallC = new CollisionBounds(CollisionBounds::Shapes::BOX, CollisionBounds::Types::WALL, 1280.0f,5.0f);
-	Wall* topWall = new Wall(topWallC, Vector2f(640.0f, 717.5));
+	Collider* topWallC = new Collider(Collider::Shapes::BOX, Collider::Types::WALL, 1280.0f,20.0f);
+	Wall* topWall = new Wall(topWallC, Vector2f(640.0f, 720.0f));
 	addNewObject(topWall);
 
-	CollisionBounds* bottomWallC = new CollisionBounds(CollisionBounds::Shapes::BOX, CollisionBounds::Types::WALL, 1280.0f, 5.0f);
-	Wall* bottomWall = new Wall(bottomWallC, Vector2f(640.0f, 2.5f));
+	Collider* bottomWallC = new Collider(Collider::Shapes::BOX, Collider::Types::WALL, 1280.0f, 20.0f);
+	Wall* bottomWall = new Wall(bottomWallC, Vector2f(640.0f, 0.0f));
 	addNewObject(bottomWall);
 }
