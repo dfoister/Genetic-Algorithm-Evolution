@@ -55,7 +55,7 @@ void Rendering::DrawHealth(sf::Vector2f pos, float health)
 	t.setFont(f);
 	t.setCharacterSize(15);
 	t.setString(std::to_string(health));
-	t.setPosition(sf::Vector2f(pos.x -25, pos.y - 25));
+	t.setPosition(sf::Vector2f(pos.x -30, pos.y - 35));
 	t.setFillColor(sf::Color::Black);
 
 	window.draw(t);
