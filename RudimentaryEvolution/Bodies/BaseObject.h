@@ -30,6 +30,7 @@ public:
 protected:
 
 	Collider* collider_;
+	std::mt19937 engine_;
 };
 
 #endif

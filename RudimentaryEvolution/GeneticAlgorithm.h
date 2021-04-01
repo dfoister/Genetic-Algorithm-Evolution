@@ -5,16 +5,6 @@
 class GeneticAlgorithm
 {
 public:
-	GeneticAlgorithm() {};
-	~GeneticAlgorithm() {};
-
-	GeneticAlgorithm(std::vector <Organism*> organisms) {
-		computePopulationFitness();
-		crossoverHealthyPopulation();
-		mutateHealthyPopulation();
-		createNewPopulation();
-	};
-
 	enum class SelectionType {
 		ROULETTE,
 		TOURNAMENT,
@@ -31,15 +21,29 @@ public:
 	};
 
 	enum class MutationType {
-
+		RANDOM,
+		SCRAMBLE,
+		INVERSION,
+		SWAP,
+		DEFAULT
 	};
+
+	GeneticAlgorithm();
+		~GeneticAlgorithm();
+
+	GeneticAlgorithm(std::vector <Organism*> organisms);
+	GeneticAlgorithm(std::vector <Organism*> organisms, SelectionType selection, CrossoverType crossover, MutationType mutation);
+
+
+	void computeAlgorithm();
 
 	std::vector<Organism*> getSortedPopulation();
 	std::vector<Organism*> getFittestSelection();
 
 	void computePopulationFitness();
-	void crossoverHealthyPopulation();
-	void mutateHealthyPopulation();
+	void selectionProcess();
+	void crossoverProcess();
+	void mutationProcess();
 	void createNewPopulation();
 
 	void selectionRouletteWheel();
@@ -60,6 +64,10 @@ protected:
 	std::vector<Organism*> population_;
 	std::vector<Organism*> fittestPopulation_;
 	std::vector<Organism*> newPopulation_;
+
+	SelectionType selection_;
+	CrossoverType crossover_;
+	MutationType mutation_;
 
 
 

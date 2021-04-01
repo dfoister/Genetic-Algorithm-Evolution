@@ -4,12 +4,12 @@
 Food::Food()
 {
 	std::random_device rd;
-	std::default_random_engine eng(rd());
-	std::uniform_real_distribution<> distrX(10, 1270);
-	std::uniform_real_distribution<> distrY(10, 710);
+	engine_.seed(rd());
+	std::uniform_real_distribution<> distrX(10.0f, 1270.0f);
+	std::uniform_real_distribution<> distrY(10.0f, 710.0f);
 
-	float randomX = static_cast <float> (distrX(eng));
-	float randomY = static_cast <float> (distrY(eng));
+	float randomX = static_cast <float> (distrX(engine_));
+	float randomY = static_cast <float> (distrY(engine_));
 
 	pos_ = Eigen::Vector2f(randomX, randomY);
 

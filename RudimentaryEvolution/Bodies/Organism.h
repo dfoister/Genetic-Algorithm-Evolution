@@ -7,7 +7,7 @@ public:
 
 	std::vector<float> getChromosome();
 	void setChromosome(std::vector<float> chromosome);
-
+	
 
 protected:
 	float forwardSpeed_;
@@ -18,5 +18,6 @@ protected:
 	float baseHealth_;
 	std::vector<float> chromosome_;
 
+	
 };
 
