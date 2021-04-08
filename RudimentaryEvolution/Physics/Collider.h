@@ -2,7 +2,7 @@
 #include <cmath>
 #include <tuple>
 #include <string>
-#include <../../Common/eigen-3.3.9/Eigen/Dense>
+#include <Eigen/Dense>
 #include "Vec2Operations.h"
 #include <Graphics/Color.hpp>
 

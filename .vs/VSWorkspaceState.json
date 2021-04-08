@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\RudimentaryEvolution",
+    "\\RudimentaryEvolution\\Physics"
   ],
-  "SelectedNode": "\\RudimentaryEvolution.sln",
+  "SelectedNode": "\\RudimentaryEvolution",
   "PreviewInSolutionExplorer": false
 }

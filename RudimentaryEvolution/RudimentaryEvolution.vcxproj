@@ -72,19 +72,23 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common;C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\SFML\SFML;C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\eigen-3.3.9;C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\eigen-3.3.9\Eigen;C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\SFML\SFML;C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\eigen-3.3.9;$(IncludePath);$(IncludePath);C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\SFML</IncludePath>
-    <LibraryPath>C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\SFML\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Common\SFML\SFML;$(SolutionDir)\Common\SFML;$(SolutionDir)\Common\eigen-3.3.9\Eigen;$(SolutionDir)\Common\eigen-3.3.9;$(SolutionDir)\Common;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Common\SFML\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common;C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\SFML\SFML;C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\eigen-3.3.9;C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\eigen-3.3.9\Eigen;$(VC_IncludePath);$(WindowsSDK_IncludePath);;$(IncludePath);C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\SFML</IncludePath>
-    <LibraryPath>C:\Users\devon\OneDrive\Documents\Rudimentary-Evolution-Disseration\RudimentaryEvolution\Common\SFML\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)\Common\SFML\SFML;$(SolutionDir)\Common\SFML;$(SolutionDir)\Common\eigen-3.3.9\Eigen;$(SolutionDir)\Common\eigen-3.3.9;$(SolutionDir)\Common;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Common\SFML\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>$(SolutionDir)\Common\SFML\SFML;$(SolutionDir)\Common\SFML;$(SolutionDir)\Common\eigen-3.3.9\Eigen;$(SolutionDir)\Common\eigen-3.3.9;$(SolutionDir)\Common;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Common\SFML\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>$(SolutionDir)\Common\SFML\SFML;$(SolutionDir)\Common\SFML;$(SolutionDir)\Common\eigen-3.3.9\Eigen;$(SolutionDir)\Common\eigen-3.3.9;$(SolutionDir)\Common;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)\Common\SFML\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -141,6 +145,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
