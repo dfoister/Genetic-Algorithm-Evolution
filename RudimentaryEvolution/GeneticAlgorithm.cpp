@@ -8,7 +8,7 @@ GeneticAlgorithm::GeneticAlgorithm()
 	computeAlgorithm();
 
 	int i = 4;
-
+	int yes = 0;
 	int h = i + i;
 }
 
