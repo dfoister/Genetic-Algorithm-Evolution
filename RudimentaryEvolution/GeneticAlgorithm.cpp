@@ -1,5 +1,8 @@
 #include "GeneticAlgorithm.h"
 
+
+std::mt19937 engine;
+
 GeneticAlgorithm::GeneticAlgorithm()
 {
 	selection_ = SelectionType::DEFAULT;
@@ -54,6 +57,7 @@ std::vector<Organism*> GeneticAlgorithm::getFittestSelection()
 	return fittestPopulation_;
 }
 
+
 void GeneticAlgorithm::computePopulationFitness()
 {
 
@@ -68,6 +72,8 @@ void GeneticAlgorithm::computePopulationFitness()
 
 void GeneticAlgorithm::selectionProcess()
 {
+	std::random_device rdSelection;
+
 	if (selection_ == SelectionType::RANK) selectionRank();
 	if (selection_ == SelectionType::ROULETTE || selection_ == SelectionType::DEFAULT) selectionRouletteWheel();
 	if (selection_ == SelectionType::STOCHASTIC) selectionStochasticUniversalSampling();
@@ -77,6 +83,8 @@ void GeneticAlgorithm::selectionProcess()
 
 void GeneticAlgorithm::crossoverProcess()
 {
+	std::random_device rdCrossover;
+
 	if (crossover_ == CrossoverType::UNIFORM || crossover_ == CrossoverType::DEFAULT) crossoverUniform();
 	if (crossover_ == CrossoverType::SINGLEPOINT) crossoverSinglePoint();
 	if (crossover_ == CrossoverType::MULTIPOINT) crossoverMultiPoint();
@@ -85,6 +93,9 @@ void GeneticAlgorithm::crossoverProcess()
 
 void GeneticAlgorithm::mutationProcess()
 {
+	std::random_device rdCrossover;
+	engine.seed(rdCrossover);
+
 	if (mutation_ == MutationType::SCRAMBLE || mutation_ == MutationType::DEFAULT) mutationScramble();
 	if (mutation_ == MutationType::SWAP) mutationSwap();
 	if (mutation_ == MutationType::INVERSION) mutationInversion();
@@ -97,6 +108,28 @@ void GeneticAlgorithm::createNewPopulation()
 
 void GeneticAlgorithm::selectionRouletteWheel()
 {
+	int totalFitness = 0;
+
+	for (Organism* i : population_) {
+		totalFitness += i->getHealth();
+	}
+
+	std::uniform_real_distribution<> distrWheel(0.0f, totalFitness);
+
+	for (int i = 0; i < 5; i++) {
+
+		float tempSpin = static_cast <float> (distrWheel(engine));
+		float tempFitnessHolder = 0;
+
+		for (Organism* i : population_) {
+			tempFitnessHolder += i->getHealth();
+			if (tempSpin <= tempFitnessHolder) {
+				fittestPopulation_.emplace_back(i);
+				continue;
+			}
+		}
+
+	}
 }
 
 void GeneticAlgorithm::selectionTournament()
