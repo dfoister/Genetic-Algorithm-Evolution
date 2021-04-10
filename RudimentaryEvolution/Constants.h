@@ -13,6 +13,8 @@ namespace constants
 	inline static std::mt19937 mt;
 
 	const int FITTEST_POPULATION_SIZE = 5;
+	const int TOURNAMENT_SIZE = 3;
+	const int SURVIVORS = 1;
 	
 	const float GENERATION_TIME_IN_SECONDS = 30.0f;
 
