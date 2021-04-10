@@ -1,4 +1,7 @@
-spe#include "GeneticAlgorithm.h"
+#include "GeneticAlgorithm.h"
+
+
+std::mt19937 engine;
 
 GeneticAlgorithm::GeneticAlgorithm()
 {
@@ -54,17 +57,17 @@ std::vector<Organism*> GeneticAlgorithm::getFittestSelection()
 	return fittestPopulation_;
 }
 
+
 void GeneticAlgorithm::computePopulationFitness()
 {
-
 	std::sort(population_.begin(), population_.end(), [](Organism* o1, Organism* o2) { return o1->getHealth() < o2->getHealth(); });
-
-
 }
 
 void GeneticAlgorithm::selectionProcess()
 {
-	if (selection_ == SelectionType::RANK) selectionRank();
+	std::random_device rdSelection;
+
+	if (selection_ == SelectionType::RANDOM) selectionRandom();
 	if (selection_ == SelectionType::ROULETTE || selection_ == SelectionType::DEFAULT) selectionRouletteWheel();
 	if (selection_ == SelectionType::STOCHASTIC) selectionStochasticUniversalSampling();
 	if (selection_ == SelectionType::TOURNAMENT) selectionTournament();
@@ -73,6 +76,8 @@ void GeneticAlgorithm::selectionProcess()
 
 void GeneticAlgorithm::crossoverProcess()
 {
+	std::random_device rdCrossover;
+
 	if (crossover_ == CrossoverType::UNIFORM || crossover_ == CrossoverType::DEFAULT) crossoverUniform();
 	if (crossover_ == CrossoverType::SINGLEPOINT) crossoverSinglePoint();
 	if (crossover_ == CrossoverType::MULTIPOINT) crossoverMultiPoint();
@@ -81,6 +86,9 @@ void GeneticAlgorithm::crossoverProcess()
 
 void GeneticAlgorithm::mutationProcess()
 {
+	std::random_device rdMutation;
+	engine.seed(rdMutation);
+
 	if (mutation_ == MutationType::SCRAMBLE || mutation_ == MutationType::DEFAULT) mutationScramble();
 	if (mutation_ == MutationType::SWAP) mutationSwap();
 	if (mutation_ == MutationType::INVERSION) mutationInversion();
@@ -93,19 +101,77 @@ void GeneticAlgorithm::createNewPopulation()
 
 void GeneticAlgorithm::selectionRouletteWheel()
 {
+	int totalFitness = 0;
+
+	for (Organism* i : population_) {
+		totalFitness += i->getHealth();
+	}
+
+	std::uniform_real_distribution<> distrWheel(0.0f, totalFitness);
+
+	for (int i = 0; i < constants::FITTEST_POPULATION_SIZE; i++) {
+
+		float tempSpin = static_cast <float> (distrWheel(engine));
+		float tempFitnessHolder = 0;
+
+		for (Organism* i : population_) {
+			tempFitnessHolder += i->getHealth();
+			if (tempSpin <= tempFitnessHolder) {
+				fittestPopulation_.emplace_back(i);
+				continue;
+			}
+		}
+
+	}
 }
 
 void GeneticAlgorithm::selectionTournament()
 {
+	std::uniform_int_distribution<> distrPopulation(0, population_.size() - 1);
+
+	for (int i = 0; i < constants::FITTEST_POPULATION_SIZE; i++) {
+
+		std::vector<Organism*> competitors;
+
+		for (int j = 0; j < constants::TOURNAMENT_SIZE; i++) {
+
+			 competitors.emplace_back(population_[distrPopulation(engine)]);
+			 competitors.emplace_back(population_[distrPopulation(engine)]);
+			 competitors.emplace_back(population_[distrPopulation(engine)]);
+		}
+
+
+		std::sort(competitors.begin(), competitors.end(), [](Organism* o1, Organism* o2) { return o1->getHealth() < o2->getHealth(); });
+
+		fittestPopulation_.emplace_back(competitors.at(0));
+
+	}
+
+
 }
 
 void GeneticAlgorithm::selectionStochasticUniversalSampling()
 {
 }
 
-void GeneticAlgorithm::selectionRank()
+
+void GeneticAlgorithm::selectionRandom()
 {
+	std::vector<int> numbers;
+
+	for (int i = 0; i < 20; i++)      
+		numbers.push_back(i);
+
+	std::random_device rand;
+	std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(rand));
+
+	for (int i = 0; i < constants::FITTEST_POPULATION_SIZE; i++) {
+		fittestPopulation_.emplace_back(population_[numbers[i]]);
+	}
+
 }
+
+
 
 void GeneticAlgorithm::crossoverUniform()
 {

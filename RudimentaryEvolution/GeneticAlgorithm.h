@@ -9,7 +9,7 @@ public:
 		ROULETTE,
 		TOURNAMENT,
 		STOCHASTIC,
-		RANK,
+		RANDOM,
 		DEFAULT
 	};
 
@@ -49,7 +49,7 @@ public:
 	void selectionRouletteWheel();
 	void selectionTournament();
 	void selectionStochasticUniversalSampling();
-	void selectionRank();
+	void selectionRandom();
 
 	void crossoverUniform();
 	void crossoverSinglePoint();
