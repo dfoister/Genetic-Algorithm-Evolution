@@ -1,4 +1,4 @@
-spe#include "GeneticAlgorithm.h"
+#include "GeneticAlgorithm.h"
 
 
 std::mt19937 engine;
@@ -77,7 +77,30 @@ void GeneticAlgorithm::selectionProcess()
 void GeneticAlgorithm::crossoverProcess()
 {
 	std::random_device rdCrossover;
+	
 
+	std::shuffle(fittestPopulation_.begin(), fittestPopulation_.end(), std::default_random_engine(rdCrossover()));
+		
+	int temp = 0;
+
+	for (int i = 0; i < static_cast <int>(fittestPopulation_.size()); i++) {
+		
+		if (temp == 1) {
+			temp = 0;
+			continue;
+		}
+
+		if (temp == 0) {
+
+			//matingPair pair(fittestPopulation_.at(i), fittestPopulation_.at(i + 1));
+
+			//matingPairs.emplace_back(pair);
+
+			temp = 1;
+		}
+	}
+
+	
 	if (crossover_ == CrossoverType::UNIFORM || crossover_ == CrossoverType::DEFAULT) crossoverUniform();
 	if (crossover_ == CrossoverType::SINGLEPOINT) crossoverSinglePoint();
 	if (crossover_ == CrossoverType::MULTIPOINT) crossoverMultiPoint();
@@ -87,7 +110,8 @@ void GeneticAlgorithm::crossoverProcess()
 void GeneticAlgorithm::mutationProcess()
 {
 	std::random_device rdMutation;
-	engine.seed(rdMutation);
+
+	engine.seed(rdMutation());
 
 	if (mutation_ == MutationType::SCRAMBLE || mutation_ == MutationType::DEFAULT) mutationScramble();
 	if (mutation_ == MutationType::SWAP) mutationSwap();
@@ -101,12 +125,12 @@ void GeneticAlgorithm::createNewPopulation()
 
 void GeneticAlgorithm::selectionRouletteWheel()
 {
-	int totalFitness = 0;
+	float totalFitness = 0;
 
 	for (Organism* i : population_) {
 		totalFitness += i->getHealth();
 	}
-
+	
 	std::uniform_real_distribution<> distrWheel(0.0f, totalFitness);
 
 	for (int i = 0; i < constants::FITTEST_POPULATION_SIZE; i++) {
@@ -134,10 +158,10 @@ void GeneticAlgorithm::selectionTournament()
 		std::vector<Organism*> competitors;
 
 		for (int j = 0; j < constants::TOURNAMENT_SIZE; i++) {
-
-			 competitors.emplace_back(population_[distrPopulation(engine)]);
-			 competitors.emplace_back(population_[distrPopulation(engine)]);
-			 competitors.emplace_back(population_[distrPopulation(engine)]);
+			
+			competitors.emplace_back(population_[distrPopulation(engine)]);
+			competitors.emplace_back(population_[distrPopulation(engine)]);
+			competitors.emplace_back(population_[distrPopulation(engine)]);
 		}
 
 
@@ -163,7 +187,7 @@ void GeneticAlgorithm::selectionRandom()
 		numbers.push_back(i);
 
 	std::random_device rand;
-	std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(rand));
+	std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(rand()));
 
 	for (int i = 0; i < constants::FITTEST_POPULATION_SIZE; i++) {
 		fittestPopulation_.emplace_back(population_[numbers[i]]);
@@ -175,10 +199,17 @@ void GeneticAlgorithm::selectionRandom()
 
 void GeneticAlgorithm::crossoverUniform()
 {
+	
+
+
+
 }
 
 void GeneticAlgorithm::crossoverSinglePoint()
 {
+
+
+
 }
 
 void GeneticAlgorithm::crossoverMultiPoint()

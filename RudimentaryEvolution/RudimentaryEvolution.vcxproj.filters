@@ -57,6 +57,9 @@
     <ClInclude Include="Physics\Vec2Operations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="matingPair.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Physics\CollisionPair.cpp">

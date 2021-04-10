@@ -1,25 +1,2 @@
-﻿  BaseObject.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  Organism.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  Food.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  EvolutionSimulation.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  GeneticAlgorithm.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  main.cpp
-  Collider.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  CollisionPair.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  RigidBody.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  SimPhysics.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  Wall.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  Poison.cpp
-C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Common\eigen-3.3.9\Eigen\Dense(1,10): fatal error C1083: Cannot open include file: 'Core': No such file or directory
-  Rendering.cpp
-  Generating Code...
+﻿  GeneticAlgorithm.cpp
+C:\Users\devon\source\repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\GeneticAlgorithm.cpp(130,33): warning C4244: '+=': conversion from 'float' to 'int', possible loss of data

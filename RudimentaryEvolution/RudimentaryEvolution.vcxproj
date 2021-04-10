@@ -161,6 +161,7 @@
     <ClInclude Include="Constants.h" />
     <ClInclude Include="EvolutionSimulation.h" />
     <ClInclude Include="GeneticAlgorithm.h" />
+    <ClInclude Include="matingPair.h" />
     <ClInclude Include="Physics\Vec2Operations.h" />
     <ClInclude Include="Physics\Collider.h" />
     <ClInclude Include="Physics\CollisionPair.h" />

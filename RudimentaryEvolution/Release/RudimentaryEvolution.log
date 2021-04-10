@@ -1,18 +1,1 @@
-﻿  BaseObject.cpp
-  Organism.cpp
-  Food.cpp
-  EvolutionSimulation.cpp
-  GeneticAlgorithm.cpp
-  main.cpp
-  Collider.cpp
-  CollisionPair.cpp
-  RigidBody.cpp
-  SimPhysics.cpp
-  Wall.cpp
-  Poison.cpp
-  Rendering.cpp
-  Generating code
-  Previous IPDB not found, fall back to full compilation.
-  All 1185 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
-  Finished generating code
-  RudimentaryEvolution.vcxproj -> C:\Users\devon\Source\Repos\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Release\RudimentaryEvolution.exe
+﻿  GeneticAlgorithm.cpp

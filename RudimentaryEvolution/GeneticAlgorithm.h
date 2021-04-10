@@ -1,6 +1,4 @@
-#include <vector>
-#include "Bodies/Organism.h"
-#include "Constants.h"
+#include "matingPair.h"
 
 class GeneticAlgorithm
 {
@@ -64,6 +62,7 @@ protected:
 	std::vector<Organism*> population_;
 	std::vector<Organism*> fittestPopulation_;
 	std::vector<Organism*> newPopulation_;
+	std::vector<matingPair*> matingPairs;
 
 	SelectionType selection_;
 	CrossoverType crossover_;

@@ -12,7 +12,7 @@ namespace constants
 
 	inline static std::mt19937 mt;
 
-	const int FITTEST_POPULATION_SIZE = 5;
+	const int FITTEST_POPULATION_SIZE = 10;
 	const int TOURNAMENT_SIZE = 3;
 	const int SURVIVORS = 1;
 	
