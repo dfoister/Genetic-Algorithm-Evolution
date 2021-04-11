@@ -92,9 +92,9 @@ void GeneticAlgorithm::crossoverProcess()
 
 		if (temp == 0) {
 
-			//matingPair pair(fittestPopulation_.at(i), fittestPopulation_.at(i + 1));
+			matingPair pair(fittestPopulation_.at(i), fittestPopulation_.at(i + 1));
 
-			//matingPairs.emplace_back(pair);
+			matingPairs.emplace_back(pair);
 
 			temp = 1;
 		}
@@ -200,7 +200,32 @@ void GeneticAlgorithm::selectionRandom()
 void GeneticAlgorithm::crossoverUniform()
 {
 	
+	for (matingPair mp : matingPairs) {
 
+		Organism* o1 = mp.getParentA();
+		Organism* o2 = mp.getParentB();
+
+		std::vector<float> o1Chromosome;
+		std::vector<float> o2Chromosome;
+
+		for (int i = 0; i < 6; i++) {
+
+			
+			if ((rand() % 2) != 0) {
+
+				o1Chromosome.emplace_back(o2->getChromosome().at(i));
+				o2Chromosome.emplace_back(o1->getChromosome().at(i));
+			}
+			else {
+
+				o1Chromosome.emplace_back(o1->getChromosome().at(i));
+				o2Chromosome.emplace_back(o2->getChromosome().at(i));
+			}
+		}
+
+		fittestPopulation_.emplace_back(new Organism(o1Chromosome));
+		fittestPopulation_.emplace_back(new Organism(o2Chromosome));
+	}
 
 
 }
@@ -208,12 +233,81 @@ void GeneticAlgorithm::crossoverUniform()
 void GeneticAlgorithm::crossoverSinglePoint()
 {
 
+std::random_device crossoverSP;
+engine.seed(crossoverSP());
+
+std::uniform_int_distribution<> distrPopulation(1, 5);
+int randomPop = distrPopulation(engine);
+
+for (matingPair mp : matingPairs) {
+
+	Organism* o1 = mp.getParentA();
+	Organism* o2 = mp.getParentB();
+
+	std::vector<float> o1Chromosome;
+	std::vector<float> o2Chromosome;
+
+	for (int i = 0; i < randomPop; i++) {
+
+		o1Chromosome.emplace_back(o1->getChromosome().at(i));
+		o2Chromosome.emplace_back(o2->getChromosome().at(i));
+
+	}
+
+	for (int i = randomPop; i < 6; i++) {
+		o1Chromosome.emplace_back(o2->getChromosome().at(i));
+		o2Chromosome.emplace_back(o1->getChromosome().at(i));
+	}
+
+	fittestPopulation_.emplace_back(new Organism(o1Chromosome));
+	fittestPopulation_.emplace_back(new Organism(o2Chromosome));
+}
 
 
 }
 
 void GeneticAlgorithm::crossoverMultiPoint()
 {
+	std::random_device rdNumbers;
+	std::vector<int> numbers{ 1,2,3,4,5 };
+	std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(rdNumbers()));
+
+	std::vector<int> numbers2;
+	numbers2.emplace_back(numbers.at(0));
+	numbers2.emplace_back(numbers.at(1));
+
+	std::sort(numbers2.begin(), numbers2.end());
+
+	std::vector<Organism*> newOrganisms;
+
+	for (matingPair mp : matingPairs) {
+
+		Organism* o1 = mp.getParentA();
+		Organism* o2 = mp.getParentB();
+
+		std::vector<float> o1Chromosome;
+		std::vector<float> o2Chromosome;
+
+		for (int i = 0; i < numbers2.at(0); i++) {
+
+			o1Chromosome.emplace_back(o1->getChromosome().at(i));
+			o2Chromosome.emplace_back(o2->getChromosome().at(i));
+
+		}
+
+		for (int i = numbers2.at(0); i < numbers2.at(1); i++) {
+			o1Chromosome.emplace_back(o2->getChromosome().at(i));
+			o2Chromosome.emplace_back(o1->getChromosome().at(i));
+		}
+
+		for (int i = numbers2.at(1); i < 6; i++) {
+			o1Chromosome.emplace_back(o1->getChromosome().at(i));
+			o2Chromosome.emplace_back(o2->getChromosome().at(i));
+		}
+
+		fittestPopulation_.emplace_back(new Organism(o1Chromosome));
+		fittestPopulation_.emplace_back(new Organism(o2Chromosome));
+	}
 }
 
 void GeneticAlgorithm::mutationRandomValue()
@@ -222,12 +316,107 @@ void GeneticAlgorithm::mutationRandomValue()
 
 void GeneticAlgorithm::mutationScramble()
 {
+	std::random_device mutationScramble;
+	engine.seed(mutationScramble());
+
+	std::uniform_real_distribution<> distrPopulation(0.0f, 100.0f);
+
+	std::random_device rdNumbers;
+
+
+	std::vector<float> tempArray;
+
+	for (Organism* o : fittestPopulation_) {
+
+		if (distrPopulation(engine) <= constants::MUTATION_CHANCE) {
+
+			std::vector<int> numbers{ 0,1,2,3,4,5 };
+			std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(rdNumbers()));
+
+			std::vector<int> numbers2;
+			numbers2.emplace_back(numbers.at(0));
+			numbers2.emplace_back(numbers.at(1));
+
+			std::sort(numbers2.begin(), numbers2.end());
+
+			for (int i = numbers2[0]; i <= numbers2[1]; i++) {
+				tempArray.emplace_back(o->chromosome_[i]);
+			}
+
+			std::shuffle(tempArray.begin(), tempArray.end(), std::default_random_engine(rdNumbers()));
+
+			for (int i = numbers[0]; i <= numbers[1]; i++) {
+				o->chromosome_[i] = tempArray.back();
+				tempArray.pop_back();
+			}
+		}
+	}
+
+
 }
 
 void GeneticAlgorithm::mutationInversion()
 {
+
+	std::random_device mutationInversion;
+	engine.seed(mutationInversion());
+
+	std::uniform_real_distribution<> distrPopulation(0.0f, 100.0f);
+
+	std::random_device rdNumbers;
+
+
+	std::vector<float> tempArray;
+
+	for (Organism* o : fittestPopulation_) {
+
+			if (distrPopulation(engine) <= constants::MUTATION_CHANCE) {
+				
+				std::vector<int> numbers{ 0,1,2,3,4,5 };
+				std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(rdNumbers()));
+
+				std::vector<int> numbers2;
+				numbers2.emplace_back(numbers.at(0));
+				numbers2.emplace_back(numbers.at(1));
+
+				std::sort(numbers2.begin(), numbers2.end());
+
+				for (int i = numbers2[0]; i <= numbers2[1]; i++) {
+					tempArray.emplace_back(o->chromosome_[numbers2[i]]);
+				}
+
+				for (int i = numbers[0]; i <= numbers[1]; i++) {
+					o->chromosome_[i] = tempArray.back();
+					tempArray.pop_back();
+				}
+			}
+	}
+
+
 }
 
 void GeneticAlgorithm::mutationSwap()
 {
+	std::random_device mutationSwap;
+	engine.seed(mutationSwap());
+
+	std::uniform_real_distribution<> distrPopulation(0.0f, 100.0f);
+
+	for (Organism* o : fittestPopulation_) {
+		
+		for(int i = 0; i < 6; i++){
+
+
+			if (distrPopulation(engine) <= constants::MUTATION_CHANCE) {
+
+				std::uniform_int_distribution<> distrSwap(0,5);
+				int index = distrSwap(engine);
+
+				float temp = o->chromosome_[index];
+
+				o->chromosome_[index] = o->chromosome_[i];
+				o->chromosome_[i] = temp;
+			}
+		}
+	}
 }

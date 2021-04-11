@@ -62,7 +62,7 @@ protected:
 	std::vector<Organism*> population_;
 	std::vector<Organism*> fittestPopulation_;
 	std::vector<Organism*> newPopulation_;
-	std::vector<matingPair*> matingPairs;
+	std::vector<matingPair> matingPairs;
 
 	SelectionType selection_;
 	CrossoverType crossover_;

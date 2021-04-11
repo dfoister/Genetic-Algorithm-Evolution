@@ -17,6 +17,9 @@ Organism::Organism()
 	pos_ = Eigen::Vector2f(randomX, randomY);
 
 
+
+
+
 	collider_ = new Collider(Collider::Shapes::CIRCLE, Collider::Types::ORGANISM, 10.0f);
 	collider_->setColour(sf::Color::Magenta);
 	collider_->setObject(this);
@@ -33,7 +36,9 @@ Organism::Organism()
 	foodRadius_ = static_cast <float> (distrBaseStats(engine_));
 	poisonRadius_ = static_cast <float> (distrBaseStats(engine_));
 	
-	std::cout << forwardSpeed_ << "," << turningSpeed_ << "," << bodySize_ << "," << baseHealth_ << "," << foodRadius_ << "," << poisonRadius_ << "\n";
+	//std::cout << forwardSpeed_ << "," << turningSpeed_ << "," << bodySize_ << "," << baseHealth_ << "," << foodRadius_ << "," << poisonRadius_ << "\n";
+
+	//std::cout << randomPop << "\n";
 
 	chromosome_.emplace_back(forwardSpeed_);
 	chromosome_.emplace_back(turningSpeed_);
@@ -43,6 +48,24 @@ Organism::Organism()
 	chromosome_.emplace_back(poisonRadius_);
 
 	currentHealth_ = baseHealth_;
+}
+
+Organism::Organism(std::vector<float> chromosome):Organism()
+{
+	forwardSpeed_ = chromosome.at(0);
+	turningSpeed_ = chromosome.at(1);
+	bodySize_ = chromosome.at(2);
+	baseHealth_ = chromosome.at(3);
+	foodRadius_ = chromosome.at(4);
+	poisonRadius_ = chromosome.at(5);
+	currentHealth_ = baseHealth_;
+
+	chromosome_.emplace_back(forwardSpeed_);
+	chromosome_.emplace_back(turningSpeed_);
+	chromosome_.emplace_back(bodySize_);
+	chromosome_.emplace_back(baseHealth_);
+	chromosome_.emplace_back(foodRadius_);
+	chromosome_.emplace_back(poisonRadius_);
 }
 
 Organism::~Organism()
@@ -86,5 +109,13 @@ void Organism::setChromosome(std::vector<float> chromosome)
 	baseHealth_ = chromosome.at(3);
 	foodRadius_ = chromosome.at(4);
 	poisonRadius_ = chromosome.at(5);
+	currentHealth_ = baseHealth_;
+
+	chromosome_.emplace_back(forwardSpeed_);
+	chromosome_.emplace_back(turningSpeed_);
+	chromosome_.emplace_back(bodySize_);
+	chromosome_.emplace_back(baseHealth_);
+	chromosome_.emplace_back(foodRadius_);
+	chromosome_.emplace_back(poisonRadius_);
 }
 
