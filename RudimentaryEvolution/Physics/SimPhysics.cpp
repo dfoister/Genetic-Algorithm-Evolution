@@ -42,6 +42,7 @@ void SimPhysics::removeCollider(Collider* c) {
 }
 
 void SimPhysics::update(float dt) {
+	
 	integration(dt);
 	collisionDetection(dt);
 	collisionResolution(dt);
@@ -49,13 +50,14 @@ void SimPhysics::update(float dt) {
 
 
 	// Reset all forces back to 0.
-	for (auto body : allBodies_) {
+	for (RigidBody* body : allBodies_) {
 		body->force_ = Vector2f(0, 0);
 	}
 }
 
 void SimPhysics::integration(float dt) {
-	for (auto body : allBodies_) {
+	
+	for (RigidBody* body : allBodies_) {
 		Vector2f acceleration = body->force_ * body->inverseMass_;
 		body->vel_ += acceleration * dt;
 		body->vel_ *= body->damp_;
@@ -65,7 +67,7 @@ void SimPhysics::integration(float dt) {
 
 void SimPhysics::integrateVel(float dt)
 {
-	for (auto body : allBodies_) {
+	for (RigidBody* body : allBodies_) {
 		body->pos_ += body->vel_ * dt;
 	}
 }
@@ -156,8 +158,6 @@ bool NCL::CSC3222::SimPhysics::CheckPossibleIntersection(CollisionBounds* lhs, C
 void SimPhysics::collisionResolution(float dt)
 {
 
-
-
 	for (CollisionPair* pair : collisionList_) {
 
 
@@ -170,10 +170,6 @@ void SimPhysics::collisionResolution(float dt)
 			pair->getCollisionB()->getObject()->isConsumed_ = 1;
 		}
 		else {
-
-		
-
-
 
 		RigidBody* a = pair->getCollisionA()->getObject();
 		RigidBody* b = pair->getCollisionB()->getObject();

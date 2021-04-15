@@ -8,10 +8,11 @@ int main()
 	r->window.create(sf::VideoMode(1280, 720), "bonk!");
 	r->window.setFramerateLimit(constants::FRAMERATE_LIMIT);
 	
-	sf::Clock clock;
+	
 
 	EvolutionSimulation* sim = new EvolutionSimulation(r);
 
+	sf::Clock clock;
 	clock.restart();
 
 	while (r->window.isOpen())

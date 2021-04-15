@@ -160,8 +160,6 @@ void GeneticAlgorithm::selectionTournament()
 		for (int j = 0; j < constants::TOURNAMENT_SIZE; i++) {
 			
 			competitors.emplace_back(population_[distrPopulation(engine)]);
-			competitors.emplace_back(population_[distrPopulation(engine)]);
-			competitors.emplace_back(population_[distrPopulation(engine)]);
 		}
 
 
@@ -404,18 +402,18 @@ void GeneticAlgorithm::mutationSwap()
 
 	for (Organism* o : fittestPopulation_) {
 		
-		for(int i = 0; i < 6; i++){
-
+		for (int i = 0; i < 2; i++) {
 
 			if (distrPopulation(engine) <= constants::MUTATION_CHANCE) {
 
 				std::uniform_int_distribution<> distrSwap(0,5);
+				int index2 = distrSwap(engine);
 				int index = distrSwap(engine);
 
 				float temp = o->chromosome_[index];
 
-				o->chromosome_[index] = o->chromosome_[i];
-				o->chromosome_[i] = temp;
+				o->chromosome_[index] = o->chromosome_[index2];
+				o->chromosome_[index2] = temp;
 			}
 		}
 	}
