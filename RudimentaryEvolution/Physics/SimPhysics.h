@@ -23,10 +23,10 @@ public:
 
 protected:
 
-	void integration(float dt);
+	void integrateAcceleration(float dt);
 	void collisionDetection(float dt);
 	void collisionResolution(float dt);
-	void integrateVel(float dt);
+	void integrateVelocity(float dt);
 
 	std::vector<RigidBody*> allBodies_;
 	std::vector<Collider*> allColliders_;

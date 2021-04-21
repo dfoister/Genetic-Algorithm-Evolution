@@ -43,7 +43,7 @@ public:
 	float getMaxExtentX();
 
 	RigidBody* getObject();
-	void setObject(RigidBody* object);
+	void setObject(RigidBody* o);
 
 	void setColour(sf::Color colour);
 	sf::Color getColour();

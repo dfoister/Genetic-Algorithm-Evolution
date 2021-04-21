@@ -43,10 +43,10 @@ void SimPhysics::removeCollider(Collider* c) {
 
 void SimPhysics::update(float dt) {
 	
-	integration(dt);
+	integrateAcceleration(dt);
 	collisionDetection(dt);
 	collisionResolution(dt);
-	integrateVel(dt);
+	integrateVelocity(dt);
 
 
 	// Reset all forces back to 0.
@@ -55,20 +55,20 @@ void SimPhysics::update(float dt) {
 	}
 }
 
-void SimPhysics::integration(float dt) {
+void SimPhysics::integrateAcceleration(float dt) {
 	
 	for (RigidBody* body : allBodies_) {
 		Vector2f acceleration = body->force_ * body->inverseMass_;
-		body->vel_ += acceleration * dt;
-		body->vel_ *= body->damp_;
+		body->velocity_ += acceleration * dt;
+		body->velocity_ *= body->damp_;
 	}
 
 }
 
-void SimPhysics::integrateVel(float dt)
+void SimPhysics::integrateVelocity(float dt)
 {
 	for (RigidBody* body : allBodies_) {
-		body->pos_ += body->vel_ * dt;
+		body->pos_ += body->velocity_ * dt;
 	}
 }
 
@@ -182,14 +182,14 @@ void SimPhysics::collisionResolution(float dt)
 		b->pos_ += pair->getNormal() * pair->getPenetration() * (massB / totalMass);
 
 
-		Vector2f relativeVelocity = a->vel_ - b->vel_;
+		Vector2f relativeVelocity = a->velocity_ - b->velocity_;
 		float relativeVelDotCollisionNormal = relativeVelocity.dot(pair->getNormal());
 		float coefficientOfRestitution = 0.8f;
 
 		float j = (-(1 + coefficientOfRestitution) * relativeVelDotCollisionNormal) / totalMass;
 
-		a->addImpulse(a->vel_ + massA * j * pair->getNormal());
-		b->addImpulse(b->vel_ - massB * j * pair->getNormal());
+		a->addImpulse(a->velocity_ + massA * j * pair->getNormal());
+		b->addImpulse(b->velocity_ - massB * j * pair->getNormal());
 
 		}
 

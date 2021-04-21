@@ -17,7 +17,7 @@ public:
 	}
 
 	void setVel(const Vector2f& newVel) {
-		vel_ = newVel;
+		velocity_ = newVel;
 	}
 
 	void setSpring(RigidBody* body) {
@@ -29,7 +29,7 @@ public:
 	}
 
 	void addImpulse(const Vector2f& newImpulse) {
-		vel_ += newImpulse * inverseMass_;
+		velocity_ += newImpulse * inverseMass_;
 	}
 
 	Vector2f getPos() const {
@@ -37,7 +37,7 @@ public:
 	}
 
 	Vector2f getVel() const {
-		return vel_;
+		return velocity_;
 	}
 
 	float getHealth() {
@@ -68,12 +68,9 @@ public:
 
 	}
 
-
-
-
 protected:
 	Vector2f pos_;
-	Vector2f vel_;
+	Vector2f velocity_;
 	Vector2f force_;
 	float damp_;
 	float inverseMass_;
