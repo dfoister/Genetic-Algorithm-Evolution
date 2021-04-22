@@ -16,6 +16,6 @@ namespace constants
 
 	const float GENERATION_TIME_IN_SECONDS = 30.0f;
 
-	const int FRAMERATE_LIMIT = 30;
+	const int FRAMERATE_LIMIT = 100;
 }
 #endif
