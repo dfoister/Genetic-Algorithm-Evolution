@@ -76,11 +76,12 @@ bool Organism::updateObject(float dt)
 {
 	currentHealth_ -= 0.25f;
 	if (currentHealth_ <= 0) {
+		currentHealth_ = 0.0f;
 		return false;
 	}
 	updateCollider();
 
-	if (!nearHealth_ && !nearPoison_) {
+	if (!nearHealth_ || !nearPoison_) {
 
 	std::random_device rdMove;
 
@@ -165,6 +166,11 @@ float Organism::getPoisonRadius()
 float Organism::getBaseHealth()
 {
 	return baseHealth_;
+}
+
+float Organism::getLifetime()
+{
+	return lifetime_;
 }
 
 void Organism::setNearestHealth(Vector2f pos)

@@ -1,4 +1,5 @@
 #include "GeneticAlgorithm.h"
+#include <iostream>
 
 
 std::mt19937 engine;
@@ -60,7 +61,8 @@ std::vector<Organism*> GeneticAlgorithm::getFittestSelection()
 
 void GeneticAlgorithm::computePopulationFitness()
 {
-	std::sort(population_.begin(), population_.end(), [](Organism* o1, Organism* o2) { return o1->getHealth() < o2->getHealth(); });
+	std::sort(population_.begin(), population_.end(), [](Organism* o1, Organism* o2) { return o1->getHealth()+o1->getLifetime() < o2->getHealth() + o2->getLifetime(); });
+
 }
 
 void GeneticAlgorithm::selectionProcess()
@@ -71,6 +73,16 @@ void GeneticAlgorithm::selectionProcess()
 	if (selection_ == SelectionType::ROULETTE || selection_ == SelectionType::DEFAULT) selectionRouletteWheel();
 	if (selection_ == SelectionType::STOCHASTIC) selectionStochasticUniversalSampling();
 	if (selection_ == SelectionType::TOURNAMENT) selectionTournament();
+
+	for(int i = 0; i < fittestPopulation_.size(); i++){
+
+		std::vector<float> tempChromosome;
+		tempChromosome = fittestPopulation_[i]->chromosome_;
+
+		fittestPopulation_[i] = new Organism();
+		fittestPopulation_[i]->setChromosome(tempChromosome);
+
+	}
 	
 }
 
@@ -119,8 +131,9 @@ void GeneticAlgorithm::mutationProcess()
 	if (mutation_ == MutationType::RANDOM) mutationRandomValue();
 }
 
-void GeneticAlgorithm::createNewPopulation()
+std::vector<Organism*> GeneticAlgorithm::createNewPopulation()
 {
+	return fittestPopulation_;
 }
 
 void GeneticAlgorithm::selectionRouletteWheel()
@@ -131,22 +144,31 @@ void GeneticAlgorithm::selectionRouletteWheel()
 		totalFitness += i->getHealth();
 	}
 	
-	std::uniform_real_distribution<> distrWheel(0.0f, totalFitness);
+	std::cout << "Total Fitness: " << totalFitness << "\n";
+	std::cout << "Population Size: " << population_.size() << "\n";
 
+	std::uniform_real_distribution<> distrWheel(0.0f, totalFitness);
+	std::cout << "New Population Size: " << fittestPopulation_.size() << "\n";
+	
+	bool next = 0;
 	for (int i = 0; i < constants::FITTEST_POPULATION_SIZE; i++) {
 
 		float tempSpin = static_cast <float> (distrWheel(engine));
 		float tempFitnessHolder = 0;
 
-		for (Organism* i : population_) {
-			tempFitnessHolder += i->getHealth();
-			if (tempSpin <= tempFitnessHolder) {
-				fittestPopulation_.emplace_back(i);
-				continue;
+			for (Organism* i : population_) {
+				tempFitnessHolder += i->getHealth();
+				if (tempSpin <= tempFitnessHolder) {
+					fittestPopulation_.emplace_back(i);
+					break;
+				}
 			}
-		}
+
+
 
 	}
+
+	std::cout << "New Population Size: " << fittestPopulation_.size() << "\n";
 }
 
 void GeneticAlgorithm::selectionTournament()

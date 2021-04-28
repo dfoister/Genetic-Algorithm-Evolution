@@ -44,7 +44,7 @@ public:
 	void selectionProcess();
 	void crossoverProcess();
 	void mutationProcess();
-	void createNewPopulation();
+	std::vector<Organism*> createNewPopulation();
 
 	void selectionRouletteWheel();
 	void selectionTournament();

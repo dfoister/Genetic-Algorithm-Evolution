@@ -13,6 +13,6 @@ public:
 	void DrawCircle(sf::Vector2f pos, float radius, sf::Color colour);
 	void DrawBox(sf::Vector2f pos, float width, float height, sf::Color colour);
 	void DrawOrganism(sf::Vector2f pos, float radius, sf::Color colour);
-	void DrawHealth(sf::Vector2f pos, float health);
+	void DrawText(sf::Vector2f pos, std::string text);
 };
 

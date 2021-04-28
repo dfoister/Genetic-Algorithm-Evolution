@@ -47,15 +47,15 @@ void Rendering::DrawOrganism(sf::Vector2f pos, float radius, sf::Color colour)
 
 }
 
-void Rendering::DrawHealth(sf::Vector2f pos, float health)
+void Rendering::DrawText(sf::Vector2f pos, std::string text)
 {
 	sf::Text t;
 	sf::Font f;
 	f.loadFromFile("Textures/ArialCE.ttf");
 	t.setFont(f);
 	t.setCharacterSize(15);
-	t.setString(std::to_string(health));
-	t.setPosition(sf::Vector2f(pos.x -30, pos.y - 35));
+	t.setString(text);
+	t.setPosition(sf::Vector2f(pos.x, pos.y));
 	t.setFillColor(sf::Color::Black);
 
 	window.draw(t);

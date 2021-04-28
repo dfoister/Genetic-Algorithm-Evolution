@@ -6,6 +6,7 @@
 
 class BaseObject;
 class SimPhysics;
+class Organism;
 
 class EvolutionSimulation
 {
@@ -15,9 +16,9 @@ public:
 		
 	void update(float dt);
 	void addNewObject(BaseObject* object);
-
-protected:
 	void InitialiseGame();
+protected:
+
 	void CreateWallColliders();
 
 	SimPhysics* physics_;
@@ -27,6 +28,7 @@ protected:
 
 	std::vector<BaseObject*> gameObjects_;
 	std::vector<BaseObject*> newObjects_;
+	std::vector<Organism*> oldOrganisms_;
 };
 
 #endif

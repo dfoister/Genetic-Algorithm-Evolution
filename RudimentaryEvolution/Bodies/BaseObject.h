@@ -26,11 +26,13 @@ public:
 	}
 
 	virtual bool updateObject(float dt) = 0;
+	float lifetime_;
 
 protected:
 
 	Collider* collider_;
 	std::mt19937 engine_;
+
 };
 
 #endif

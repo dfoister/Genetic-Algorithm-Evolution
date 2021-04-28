@@ -19,6 +19,7 @@ public:
 	float getFoodRadius();
 	float getPoisonRadius();
 	float getBaseHealth();
+	float getLifetime();
 
 	void setNearestHealth(Vector2f pos);
 	void setNearestPoison(Vector2f pos);

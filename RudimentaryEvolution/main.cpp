@@ -31,12 +31,15 @@ int main()
 
 	sf::Clock clock;
 	clock.restart();
-
+	float cycle = 0;
 	while (r->window.isOpen())
 	{
 
 		sf::Time elapsed = clock.restart();
+		
+
 		if (elapsed.asSeconds() > 1.5f) continue;
+		
 
 		sf::Event event;
 		while (r->window.pollEvent(event))
@@ -47,9 +50,19 @@ int main()
 
 		
 
-		r->window.clear(sf::Color(192,192,192));
-		sim->update(elapsed.asSeconds());
+		r->window.clear(sf::Color(192, 192, 192));
+
+		if (cycle < constants::GENERATION_TIME_IN_SECONDS) {
+			sim->update(elapsed.asSeconds());
+
+		}
+		else {
+			sim->InitialiseGame();
+			cycle = 0.0f;
+		}
+		
 		r->window.display();
+		cycle += elapsed.asSeconds();
 	}
 
 	return 0;
