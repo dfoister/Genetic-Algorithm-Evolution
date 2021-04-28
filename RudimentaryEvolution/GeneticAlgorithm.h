@@ -1,3 +1,5 @@
+#ifndef GENETICALGORITHM_H
+#define GENETICALGORITHM_H
 #include "matingPair.h"
 
 class GeneticAlgorithm
@@ -71,4 +73,5 @@ protected:
 
 
 };
+#endif
 

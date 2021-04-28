@@ -16,8 +16,8 @@ Organism::Organism()
 
 	pos_ = Eigen::Vector2f(randomX, randomY);
 
-
-
+	nearestHealth_, nearestPoison_ = pos_;
+	nearHealth_, nearPoison_ = 0;
 
 
 	collider_ = new Collider(Collider::Shapes::CIRCLE, Collider::Types::ORGANISM, 10.0f);
@@ -27,14 +27,14 @@ Organism::Organism()
 
 	inverseMass_ = 0.3f;
 	
-	std::uniform_real_distribution<> distrBaseStats(90.0f, 110.0f);
+	std::uniform_real_distribution<> distrBaseStats(80.0f, 120.0f);
 
 	forwardSpeed_ = static_cast <float> (distrBaseStats(engine_));
 	turningSpeed_ = static_cast <float> (distrBaseStats(engine_));
 	bodySize_ = static_cast <float> (distrBaseStats(engine_));
 	baseHealth_ = static_cast <float> (distrBaseStats(engine_));
 	foodRadius_ = static_cast <float> (distrBaseStats(engine_));
-	poisonRadius_ = static_cast <float> (distrBaseStats(engine_));
+	poisonRadius_ = static_cast <float> (distrBaseStats(engine_))/2;
 	
 	//std::cout << forwardSpeed_ << "," << turningSpeed_ << "," << bodySize_ << "," << baseHealth_ << "," << foodRadius_ << "," << poisonRadius_ << "\n";
 
@@ -80,6 +80,7 @@ bool Organism::updateObject(float dt)
 	}
 	updateCollider();
 
+	if (!nearHealth_ && !nearPoison_) {
 
 	std::random_device rdMove;
 
@@ -92,6 +93,23 @@ bool Organism::updateObject(float dt)
 	float randomY = static_cast <float> (distrY(engine_));
 
 	addForce((Eigen::Vector2f(randomX, randomY).normalized() * (forwardSpeed_*2.5f) ));
+	}
+	if (nearHealth_) {
+
+		Vector2f directionToFood = (nearestHealth_ - pos_).normalized();
+
+		addForce(directionToFood * (turningSpeed_ * 3.0f));
+		nearHealth_ = 0;
+	}
+	if (nearPoison_) {
+		
+		Vector2f directionToPoison = (nearestPoison_ - pos_).normalized();
+		std::uniform_real_distribution<> distrChanceOfAvoidance(0.0f, 100.0f);
+		float randomChance = static_cast <float> (distrChanceOfAvoidance(engine_));
+		
+		if (randomChance <= 25) addImpulse(-directionToPoison * (20.0f));
+		nearPoison_ = 0;
+	}
 
 	return true;
 }
@@ -117,5 +135,55 @@ void Organism::setChromosome(std::vector<float> chromosome)
 	chromosome_.emplace_back(baseHealth_);
 	chromosome_.emplace_back(foodRadius_);
 	chromosome_.emplace_back(poisonRadius_);
+}
+
+float Organism::getSpeed()
+{
+	return forwardSpeed_;
+}
+
+float Organism::getTurningSpeed()
+{
+	return turningSpeed_;
+}
+
+float Organism::getBodySize()
+{
+	return bodySize_;
+}
+
+float Organism::getFoodRadius()
+{
+	return foodRadius_;
+}
+
+float Organism::getPoisonRadius()
+{
+	return poisonRadius_;
+}
+
+float Organism::getBaseHealth()
+{
+	return baseHealth_;
+}
+
+void Organism::setNearestHealth(Vector2f pos)
+{
+	nearestHealth_ = pos;
+}
+
+void Organism::setNearestPoison(Vector2f pos)
+{
+	nearestPoison_ = pos;
+}
+
+void Organism::setNearPoison(bool y)
+{
+	nearPoison_ = y;
+}
+
+void Organism::setNearHealth(bool y)
+{
+	nearHealth_ = y;
 }
 

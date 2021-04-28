@@ -1,3 +1,5 @@
+#ifndef ORGANISM_H
+#define ORGANISM_H
 #include "BaseObject.h"
 class Organism : public BaseObject {
 public:
@@ -11,6 +13,19 @@ public:
 	
 	std::vector<float> chromosome_;
 
+	float getSpeed();
+	float getTurningSpeed();
+	float getBodySize();
+	float getFoodRadius();
+	float getPoisonRadius();
+	float getBaseHealth();
+
+	void setNearestHealth(Vector2f pos);
+	void setNearestPoison(Vector2f pos);
+	void setNearPoison(bool y);
+	void setNearHealth(bool y);
+
+
 protected:
 	float forwardSpeed_;
 	float turningSpeed_;
@@ -19,7 +34,10 @@ protected:
 	float poisonRadius_;
 	float baseHealth_;
 
-
-	
+	Vector2f nearestHealth_;
+	Vector2f nearestPoison_;
+	bool nearHealth_;
+	bool nearPoison_;
 };
+#endif
 

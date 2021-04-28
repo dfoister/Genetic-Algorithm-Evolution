@@ -4,18 +4,18 @@
 //  File Name : Constants.h   Purpose : Global Constants
 namespace constants
 {
-	const int POPULATION_SIZE = 20;    
-	const int NO_OF_FOOD = 15;
-	const int NO_OF_POISON = 10;
+	inline int POPULATION_SIZE;
+	inline int NO_OF_FOOD;
+	inline int NO_OF_POISON;
 
-	const int FITTEST_POPULATION_SIZE = 10;
-	const int TOURNAMENT_SIZE = 3;
-	const int SURVIVORS = 1;
+	inline int FITTEST_POPULATION_SIZE = 10;
+	inline int TOURNAMENT_SIZE = 3;
+	inline int SURVIVORS = 1;
 	
-	const float MUTATION_CHANCE = 10.0f;
+	inline float MUTATION_CHANCE;
 
-	const float GENERATION_TIME_IN_SECONDS = 30.0f;
+	inline float GENERATION_TIME_IN_SECONDS;
 
-	const int FRAMERATE_LIMIT = 100;
+	const int FRAMERATE_LIMIT = 30;
 }
 #endif

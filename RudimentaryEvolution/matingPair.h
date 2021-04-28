@@ -1,3 +1,6 @@
+#ifndef MATINGPAIR_H
+#define MATINGPAIR_H
+
 #include <vector>
 #include "Bodies/Organism.h"
 #include "Constants.h"
@@ -24,3 +27,4 @@ public:
 		return b_;
 	};
 };
+#endif

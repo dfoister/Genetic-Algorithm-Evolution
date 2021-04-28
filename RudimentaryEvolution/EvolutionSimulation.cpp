@@ -42,14 +42,9 @@ void EvolutionSimulation::update(float dt)
 	}
 	newObjects_.clear();
 
-
-	//renderer_->DrawCircle(sf::Vector2f(100, 100), 50.0f, sf::Color::Green);
-
 	gameTime_ += dt;
 	physics_->update(dt);
 
-
-	//srand((int)(gameTime_ * 1000.0f));
 
 	for (auto i = gameObjects_.begin(); i != gameObjects_.end(); ) {
 		if (!(*i)->updateObject(dt)) { //object has said its finished with
@@ -59,6 +54,44 @@ void EvolutionSimulation::update(float dt)
 			i = gameObjects_.erase(i);
 		}
 		else {
+
+			if ((*i)->getCollider()->colliderType_ == Collider::Types::ORGANISM) {
+
+				Organism* o = dynamic_cast<Organism*>(*i);
+
+				for (auto object : gameObjects_) {
+					if (object->getCollider()->colliderType_ == Collider::Types::FOOD) {
+
+						Food* f = dynamic_cast<Food*>(object);
+
+
+						if ((o->getPos() - f->getPos()).norm() < o->getFoodRadius()) {
+
+							o->setNearHealth(1);
+							o->setNearestHealth(f->getPos());
+
+						}
+					}
+
+					if (object->getCollider()->colliderType_ == Collider::Types::POISON) {
+
+						Poison* p = dynamic_cast<Poison*>(object);
+
+
+						if ((o->getPos() - p->getPos()).norm() < o->getPoisonRadius()) {
+
+							o->setNearestPoison(p->getPos());
+							o->setNearPoison(1);
+
+
+						}
+					}
+
+
+				}
+
+			}
+
 			Collider* col = (*i)->getCollider();
 			if (col) {
 				/// DRAWS ALL COLLIDER BOXES
@@ -67,7 +100,7 @@ void EvolutionSimulation::update(float dt)
 				}
 				else if(col->getName() == "ORGANISM"){
 					renderer_->DrawOrganism(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getRadius(), col->getColour());
-					renderer_->DrawHealth(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getObject()->getHealth());
+					//renderer_->DrawHealth(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getObject()->getHealth());
 				}
 				else {
 					renderer_->DrawBox(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getWidth(), col->getHeight(), col->getColour());
@@ -79,6 +112,7 @@ void EvolutionSimulation::update(float dt)
 			++i;
 		}
 	}
+
 }
 
 void EvolutionSimulation::InitialiseGame()

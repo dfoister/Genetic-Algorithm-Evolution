@@ -100,6 +100,8 @@ void SimPhysics::collisionDetection(float dt) {
 		}
 	}
 
+
+
 	// Outputs every collision occuring each frame.
 	for (CollisionPair* c : collisionList_) {
 		//std::cout << "COLLISION: " << c->getCollisionA()->getName() << " + " << c->getCollisionB()->getName() << "  Penetration: " << c->getPenetration() << "  Normal: " << c->getNormal();

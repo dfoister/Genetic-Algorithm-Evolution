@@ -1,3 +1,6 @@
+#ifndef EVOLUTIONSIMULATION_H
+#define EVOLUTIONSIMULATION_H
+
 #include <vector>
 #include "Graphics/Rendering.h"
 
@@ -20,8 +23,11 @@ protected:
 	SimPhysics* physics_;
 	Rendering* renderer_;
 	float gameTime_;
+	int generation_;
 
 	std::vector<BaseObject*> gameObjects_;
 	std::vector<BaseObject*> newObjects_;
 };
+
+#endif
 

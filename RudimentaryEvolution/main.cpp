@@ -1,8 +1,25 @@
 #include "EvolutionSimulation.h"
 #include "Constants.h"
+#include <iostream>
 
 int main()
 {
+	std::cout << "Population Size: ";
+	std::cin >> constants::POPULATION_SIZE;
+	std::cout << "\n";
+	std::cout << "Amount of Food: ";
+	std::cin >> constants::NO_OF_FOOD;
+	std::cout << "\n";
+	std::cout << "Amount of Poison: ";
+	std::cin >> constants::NO_OF_POISON;
+	std::cout << "\n";
+	std::cout << "Generation Time in Seconds: ";
+	std::cin >> constants::GENERATION_TIME_IN_SECONDS;
+	std::cout << "\n";
+	std::cout << "Mutation Chance Percentage (0.0f - 100.0f): ";
+	std::cin >> constants::MUTATION_CHANCE;
+	std::cout << "\n";
+
 	Rendering* r = new Rendering();
 
 	r->window.create(sf::VideoMode(1280, 720), "bonk!");
