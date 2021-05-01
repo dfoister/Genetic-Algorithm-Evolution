@@ -4,28 +4,53 @@
 
 int main()
 {
+	using namespace GLOBAL;
+
 	std::cout << "Population Size: ";
-	std::cin >> constants::POPULATION_SIZE;
+	std::cin >> POPULATION_SIZE;
 	std::cout << "\n";
 	std::cout << "Amount of Food: ";
-	std::cin >> constants::NO_OF_FOOD;
+	std::cin >> NO_OF_FOOD;
 	std::cout << "\n";
 	std::cout << "Amount of Poison: ";
-	std::cin >> constants::NO_OF_POISON;
+	std::cin >> NO_OF_POISON;
 	std::cout << "\n";
 	std::cout << "Generation Time in Seconds: ";
-	std::cin >> constants::GENERATION_TIME_IN_SECONDS;
+	std::cin >> GENERATION_TIME_IN_SECONDS;
+	std::cout << "\n";
+	std::cout << "Selection Type (Roulette = 0) (Random = 1) (Tournament = 2): ";
+	std::cin >> SELECTION_TYPE;
+
+	if (SELECTION_TYPE == 2) {
+		std::cout << "\n";
+		std::cout << "Tournament Size: ";
+		std::cin >> TOURNAMENT_SIZE;
+		std::cout << "\n";
+		std::cout << "Tournament Survivors: ";
+		std::cin >> TOURNAMENT_SURVIVORS;
+	}
+
+	std::cout << "\n";
+	std::cout << "Crossover Type (Uniform = 0) (Single-Point = 1) (Multi-Point = 2): ";
+	std::cin >> CROSSOVER_TYPE;
+	std::cout << "\n";
+	std::cout << "Mutation One Type (None = 0) (Swap = 1) (Scramble = 2) (Inversion = 3): ";
+	std::cin >> MUTATION_ONE_TYPE;
+	std::cout << "\n";
+	std::cout << "Mutation Two Type (Creep = 0) (Random Resetting = 1): ";
+	std::cin >> MUTATION_TWO_TYPE;
 	std::cout << "\n";
 	std::cout << "Mutation Chance Percentage (0.0f - 100.0f): ";
-	std::cin >> constants::MUTATION_CHANCE;
+	std::cin >> MUTATION_CHANCE;
 	std::cout << "\n";
+
 
 	Rendering* r = new Rendering();
 
-	r->window.create(sf::VideoMode(1280, 720), "bonk!");
-	r->window.setFramerateLimit(constants::FRAMERATE_LIMIT);
+	r->window.create(sf::VideoMode(1280, 720), "Evolution Simulation!");
+	r->window.setFramerateLimit(FRAMERATE_LIMIT);
 	
-	
+
 
 	EvolutionSimulation* sim = new EvolutionSimulation(r);
 
@@ -52,7 +77,7 @@ int main()
 
 		r->window.clear(sf::Color(192, 192, 192));
 
-		if (cycle < constants::GENERATION_TIME_IN_SECONDS) {
+		if (cycle < GLOBAL::GENERATION_TIME_IN_SECONDS) {
 			sim->update(elapsed.asSeconds());
 
 		}
@@ -67,3 +92,4 @@ int main()
 
 	return 0;
 }
+

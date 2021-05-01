@@ -5,40 +5,17 @@
 class GeneticAlgorithm
 {
 public:
-	enum class SelectionType {
-		ROULETTE,
-		TOURNAMENT,
-		STOCHASTIC,
-		RANDOM,
-		DEFAULT
-	};
-
-	enum class CrossoverType {
-		SINGLEPOINT,
-		MULTIPOINT,
-		UNIFORM,
-		DEFAULT
-	};
-
-	enum class MutationType {
-		RANDOM,
-		SCRAMBLE,
-		INVERSION,
-		SWAP,
-		DEFAULT
-	};
-
 	GeneticAlgorithm();
 		~GeneticAlgorithm();
 
 	GeneticAlgorithm(std::vector <Organism*> organisms);
-	GeneticAlgorithm(std::vector <Organism*> organisms, SelectionType selection, CrossoverType crossover, MutationType mutation);
 
 
 	void computeAlgorithm();
 
 	std::vector<Organism*> getSortedPopulation();
 	std::vector<Organism*> getFittestSelection();
+	float getFitness(Organism* o);
 
 	void computePopulationFitness();
 	void selectionProcess();
@@ -55,10 +32,18 @@ public:
 	void crossoverSinglePoint();
 	void crossoverMultiPoint();
 
-	void mutationRandomValue();
+	void mutationRandomResetting();
+	void mutationCreep();
+
 	void mutationScramble();
 	void mutationInversion();
 	void mutationSwap();
+
+	void mutationSwapTest();
+	void mutationScrambleTest();
+	void mutationInversionTest();
+	void mutationCreepTest();
+
 
 protected:
 	std::vector<Organism*> population_;
@@ -66,9 +51,10 @@ protected:
 	std::vector<Organism*> newPopulation_;
 	std::vector<matingPair> matingPairs;
 
-	SelectionType selection_;
-	CrossoverType crossover_;
-	MutationType mutation_;
+	int selection_; // 0 = Uniform, 1 = SinglePoint, 2 = MultiPoint
+	int crossover_; // 0 = Roulette, 1 = Random, 2 = Tournament
+	int mutationFirst_; // 0 = None 1 = Swap, 2 = Shuffle, 3 = Inversion
+	int mutationSecond_; // 0 = Creep, 1 = Random Resetting
 
 
 

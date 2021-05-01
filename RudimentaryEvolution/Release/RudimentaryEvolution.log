@@ -1,10 +1,9 @@
-﻿  Organism.cpp
-  EvolutionSimulation.cpp
-  GeneticAlgorithm.cpp
-C:\Users\dev\source\repos\dfoister\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\GeneticAlgorithm.cpp(77,19): warning C4018: '<': signed/unsigned mismatch
+﻿  GeneticAlgorithm.cpp
+C:\Users\dev\source\repos\dfoister\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\GeneticAlgorithm.cpp(453,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\dev\source\repos\dfoister\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\GeneticAlgorithm.cpp(806,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
   Generating code
-  17 of 1610 functions ( 1.1%) were compiled, the rest were copied from previous compilation.
-    15 functions were new in current compilation
-    6 functions had inline decision re-evaluated but remain unchanged
+  5 of 1617 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    12 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   RudimentaryEvolution.vcxproj -> C:\Users\dev\source\repos\dfoister\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\Release\RudimentaryEvolution.exe

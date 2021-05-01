@@ -2,15 +2,20 @@
 #define CONSTANTS_H
 
 //  File Name : Constants.h   Purpose : Global Constants
-namespace constants
+namespace GLOBAL
 {
 	inline int POPULATION_SIZE;
 	inline int NO_OF_FOOD;
 	inline int NO_OF_POISON;
 
-	inline int FITTEST_POPULATION_SIZE = 10;
+	inline int SURVIVORS = 10;
 	inline int TOURNAMENT_SIZE = 3;
-	inline int SURVIVORS = 1;
+	inline int TOURNAMENT_SURVIVORS = 1;
+
+	inline int SELECTION_TYPE;
+	inline int CROSSOVER_TYPE;
+	inline int MUTATION_ONE_TYPE;
+	inline int MUTATION_TWO_TYPE;
 	
 	inline float MUTATION_CHANCE;
 

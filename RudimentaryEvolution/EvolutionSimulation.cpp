@@ -9,7 +9,7 @@
 #include "Constants.h"
 #include <iostream>
 
-using namespace constants;
+using namespace GLOBAL;
 
 EvolutionSimulation::EvolutionSimulation(Rendering* r)
 {
@@ -93,7 +93,7 @@ void EvolutionSimulation::update(float dt)
 					if (object->getCollider()->colliderType_ == Collider::Types::POISON) {
 
 						Poison* p = dynamic_cast<Poison*>(object);
-						if ((o->getPos() - p->getPos()).norm() < o->getPoisonRadius()) {
+						if ((o->getPos() - p->getPos()).norm() < (o->getPoisonRadius()/2)) {
 
 							o->setNearestPoison(p->getPos());
 							o->setNearPoison(1);
@@ -132,6 +132,10 @@ void EvolutionSimulation::update(float dt)
 
 void EvolutionSimulation::InitialiseGame()
 {
+	GeneticAlgorithm* g = new GeneticAlgorithm();
+
+	g->mutationCreepTest();
+
 	generation_ += 1;
 	for (auto i = gameObjects_.begin(); i != gameObjects_.end(); ) {
 		if ((*i)->getCollider()->getName() == "ORGANISM") {

@@ -34,7 +34,7 @@ Organism::Organism()
 	bodySize_ = static_cast <float> (distrBaseStats(engine_));
 	baseHealth_ = static_cast <float> (distrBaseStats(engine_));
 	foodRadius_ = static_cast <float> (distrBaseStats(engine_));
-	poisonRadius_ = static_cast <float> (distrBaseStats(engine_))/2;
+	poisonRadius_ = static_cast <float> (distrBaseStats(engine_));
 	
 	//std::cout << forwardSpeed_ << "," << turningSpeed_ << "," << bodySize_ << "," << baseHealth_ << "," << foodRadius_ << "," << poisonRadius_ << "\n";
 
@@ -130,6 +130,7 @@ void Organism::setChromosome(std::vector<float> chromosome)
 	poisonRadius_ = chromosome.at(5);
 	currentHealth_ = baseHealth_;
 
+	chromosome_.clear();
 	chromosome_.emplace_back(forwardSpeed_);
 	chromosome_.emplace_back(turningSpeed_);
 	chromosome_.emplace_back(bodySize_);
