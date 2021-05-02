@@ -157,13 +157,11 @@ void GeneticAlgorithm::selectionRouletteWheel()
 	}
 	
 	std::cout << "Total Fitness: " << totalFitness << "\n";
-	std::cout << "Population Size: " << population_.size() << "\n";
 
 	std::uniform_real_distribution<> distrWheel(0.0f, totalFitness);
-	std::cout << "New Population Size: " << fittestPopulation_.size() << "\n";
 	
 	bool next = 0;
-	for (int i = 0; i < GLOBAL::SURVIVORS; i++) {
+	for (int i = 0; i < GLOBAL::POPULATION_SIZE/2; i++) {
 
 		float tempSpin = static_cast <float> (distrWheel(engine));
 		float tempFitnessHolder = 0;
@@ -187,7 +185,7 @@ void GeneticAlgorithm::selectionTournament()
 {
 	std::uniform_int_distribution<> distrPopulation(0, population_.size() - 1);
 
-	for (int i = 0; i < GLOBAL::SURVIVORS; i++) {
+	for (int i = 0; i < GLOBAL::POPULATION_SIZE/2; i++) {
 
 		std::vector<Organism*> competitors;
 
@@ -202,7 +200,6 @@ void GeneticAlgorithm::selectionTournament()
 		fittestPopulation_.emplace_back(competitors.at(0));
 
 	}
-
 
 }
 
