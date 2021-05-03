@@ -4,7 +4,7 @@
 
 using Eigen::Vector2f;
 
-class BasicVector2Operations
+class Vec2Operations
 {
 public:
 	static inline Vector2f normalized(Vector2f v)

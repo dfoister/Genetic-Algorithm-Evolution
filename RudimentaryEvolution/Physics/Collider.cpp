@@ -273,10 +273,10 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 
 			Vector2f localPoint = delta - closestPoint;
 
-			float distance = BasicVector2Operations::length(localPoint);
+			float distance = Vec2Operations::length(localPoint);
 
 			if (distance < col->getRadius()) {
-				Vector2f normal_ = BasicVector2Operations::normalized(localPoint);
+				Vector2f normal_ = Vec2Operations::normalized(localPoint);
 				Vector2f normalReversed = Vector2f(-normal_.y(), normal_.x());
 				float penetration = (col->getRadius() - distance);
 
@@ -298,12 +298,12 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 
 			float radii = radius_ + col->getRadius();
 			Vector2f delta = (col->getPosition() - position_);
-			float deltaLength = BasicVector2Operations::length(delta);
+			float deltaLength = Vec2Operations::length(delta);
 
 			if (deltaLength < radii) {
 
 				float pen = (radii - deltaLength);
-				Vector2f normal_ = BasicVector2Operations::normalized(delta);
+				Vector2f normal_ = Vec2Operations::normalized(delta);
 				return std::make_tuple(true, pen, normal_);
 
 

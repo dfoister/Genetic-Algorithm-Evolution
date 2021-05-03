@@ -49,9 +49,9 @@ public:
 		const float snappiness = 1;
 		Vector2f delta = this->getPos() - spring_->getPos();
 
-		Vector2f normal = BasicVector2Operations::normalized(delta);
+		Vector2f normal = Vec2Operations::normalized(delta);
 
-		float force = -snappiness * (BasicVector2Operations::length(delta) - 10);
+		float force = -snappiness * (Vec2Operations::length(delta) - 10);
 		float relativeVelocity = (spring_->getVel() - this->getVel()).dot(normal);
 		float forceDampened = force - c * relativeVelocity;
 		this->addForce(normal * forceDampened);
