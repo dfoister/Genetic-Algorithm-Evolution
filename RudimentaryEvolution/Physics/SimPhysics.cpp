@@ -81,22 +81,18 @@ void SimPhysics::collisionDetection(float dt) {
 			float penetration;
 			Vector2f normal;
 
+			// isCollided returns true/false, penetration amount and normal vector.
+			std::tie(result, penetration, normal) = allColliders_[i]->isCollided(allColliders_[j]);
 
-			if (allColliders_[i]->getType() != Collider::Types::WALL || allColliders_[j]->getType() != Collider::Types::WALL) {
+			if (result == true) {  // If collided
 
-				// isCollided returns true/false, penetration amount and normal vector.
-				std::tie(result, penetration, normal) = allColliders_[i]->isCollided(allColliders_[j]);
+				CollisionPair* temp = new CollisionPair(allColliders_[i], allColliders_[j], penetration, normal);
 
-				if (result == true) {  // If collided
+				// Adds the collision pair to a list
+				collisionList_.push_back(temp);
 
-
-					CollisionPair* temp = new CollisionPair(allColliders_[i], allColliders_[j], penetration, normal);
-
-					// Adds the collision pair to a list
-					collisionList_.push_back(temp);
-
-				}
 			}
+
 		}
 	}
 

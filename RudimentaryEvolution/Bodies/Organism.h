@@ -28,8 +28,8 @@ public:
 
 
 protected:
-	float forwardSpeed_;
-	float turningSpeed_;
+	float normalSpeed_;
+	float foodPoisonImpulse_;
 	float bodySize_;
 	float foodRadius_;
 	float poisonRadius_;

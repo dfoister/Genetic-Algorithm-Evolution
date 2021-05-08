@@ -143,7 +143,7 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 
 		if (col->getShape() == Collider::Shapes::BOX) {
 
-
+			
 			// Top Left of Shape 1
 			float topLeftX = position_.x() - width_ / 2;
 			float topLeftY = position_.y() - height_ / 2;
@@ -158,7 +158,7 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 				topLeftX < topLeftX2 + col->getWidth() &&
 				topLeftY + height_ > topLeftY2 &&
 				topLeftY < topLeftY2 + col->getHeight()) {
-
+				// /*
 				float xPenetration = 0;
 				float yPenetration = 0;
 				Vector2f normal_;
@@ -192,7 +192,7 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 				}
 
 				return std::make_tuple(true, penetration, normal_);
-
+				//*/
 			}
 			else {
 				// No Collision
@@ -200,9 +200,8 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 			}
 		}
 
-
 		else if (col->getShape() == Collider::Shapes::CIRCLE) {
-#
+
 			////////////////////////////////
 			// ALTERNATE COLLISION METHOD //
 			////////////////////////////////
@@ -292,8 +291,6 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 
 	else if (Collider::colliderShape_ == Collider::Shapes::CIRCLE) {
 
-
-
 		if (col->getShape() == Collider::Shapes::CIRCLE) {
 
 			float radii = radius_ + col->getRadius();
@@ -305,7 +302,6 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 				float pen = (radii - deltaLength);
 				Vector2f normal_ = Vec2Operations::normalized(delta);
 				return std::make_tuple(true, pen, normal_);
-
 
 			}
 			else {

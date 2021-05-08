@@ -161,21 +161,20 @@ void GeneticAlgorithm::selectionRouletteWheel()
 	std::uniform_real_distribution<> distrWheel(0.0f, totalFitness);
 	
 	bool next = 0;
+
 	for (int i = 0; i < GLOBAL::POPULATION_SIZE/2; i++) {
 
-		float tempSpin = static_cast <float> (distrWheel(engine));
-		float tempFitnessHolder = 0;
+		float wheelValue = static_cast <float> (distrWheel(engine));
+		float tempFitness = 0;
 
 			for (Organism* i : population_) {
-				tempFitnessHolder += getFitness(i);
-				if (tempSpin <= tempFitnessHolder) {
+				tempFitness += getFitness(i);
+
+				if (wheelValue <= tempFitness) {
 					fittestPopulation_.emplace_back(i);
 					break;
 				}
 			}
-
-
-
 	}
 
 	std::cout << "New Population Size: " << fittestPopulation_.size() << "\n";
@@ -189,18 +188,19 @@ void GeneticAlgorithm::selectionTournament()
 
 		std::vector<Organism*> competitors;
 
-		for (int j = 0; j < GLOBAL::TOURNAMENT_SIZE; i++) {
-			
+		// Adds N random competitors to list, where N is GLOBAL::TOURNAMENT_SIZE
+		for (int j = 0; j < GLOBAL::TOURNAMENT_SIZE; i++) {	
 			competitors.emplace_back(population_[distrPopulation(engine)]);
 		}
 
-
+		// Sorts the competitors based on their fitness.
 		std::sort(competitors.begin(), competitors.end(), [](Organism* o1, Organism* o2) { return o1->getHealth() + o1->getLifetime() < o2->getHealth() + o2->getLifetime(); });
 
-		fittestPopulation_.emplace_back(competitors.at(0));
-
+		// Adds N survivors to new population, where N is GLOBAL::TOURNAMENT_SURVIVORS.
+		for (int i = 0; i < GLOBAL::TOURNAMENT_SURVIVORS; i++) {
+			fittestPopulation_.emplace_back(competitors.at(i));
+		}
 	}
-
 }
 
 void GeneticAlgorithm::selectionStochasticUniversalSampling()
@@ -442,11 +442,14 @@ void GeneticAlgorithm::mutationCreep()
 
 	for (Organism* o : fittestPopulation_) {
 
+		// For each gene in the organism's chromosome
 		for (size_t i = 0; i < o->chromosome_.size(); i++) {
 
+			// If mutation chance condition successful.
 			if (distrPopulation(engine) <= GLOBAL::MUTATION_CHANCE) {
 
-				std::uniform_real_distribution<> distrCreep(-15.0f, 15.0f);
+				// Random value between -15.0f & 15.0f added to gene.
+				std::uniform_real_distribution<> distrCreep(-20.0f, 20.0f);
 				float creep = distrCreep(engine);
 
 				o->chromosome_[i] += creep;
@@ -470,32 +473,33 @@ void GeneticAlgorithm::mutationScramble()
 	std::vector<float> tempArray;
 
 	for (Organism* o : fittestPopulation_) {
-
+		// If mutation chance condition successful.
 		if (distrPopulation(engine) <= GLOBAL::MUTATION_CHANCE) {
 
-			std::vector<int> numbers{ 0,1,2,3,4,5 };
-			std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(rdNumbers()));
+			// A list of the possible indexes is created and shuffled.
+			std::vector<int> possibleIndexes{ 0,1,2,3,4,5 };
+			std::shuffle(possibleIndexes.begin(), possibleIndexes.end(), std::default_random_engine(rdNumbers()));
 
-			std::vector<int> numbers2;
-			numbers2.emplace_back(numbers.at(0));
-			numbers2.emplace_back(numbers.at(1));
+			// Picks two of the shuffled index values and stores them in a list.
+			std::vector<int> indexList;
+			indexList.emplace_back(possibleIndexes.at(0));
+			indexList.emplace_back(possibleIndexes.at(1));
+			// This list is sorted so the indexes are in the correct order.
+			std::sort(indexList.begin(), indexList.end());
 
-			std::sort(numbers2.begin(), numbers2.end());
-
-			for (int i = numbers2[0]; i <= numbers2[1]; i++) {
+			// Adds in gene in the subset to a list.
+			for (int i = indexList[0]; i <= indexList[1]; i++) {
 				tempArray.emplace_back(o->chromosome_[i]);
 			}
-
+			// The list is shuffled.
 			std::shuffle(tempArray.begin(), tempArray.end(), std::default_random_engine(rdNumbers()));
-
-			for (int i = numbers[0]; i <= numbers[1]; i++) {
+			// Shuffled subset added back to the chromosome.
+			for (int i = possibleIndexes[0]; i <= possibleIndexes[1]; i++) {
 				o->chromosome_[i] = tempArray.back();
 				tempArray.pop_back();
 			}
 		}
 	}
-
-
 }
 
 void GeneticAlgorithm::mutationInversion()
@@ -548,14 +552,18 @@ void GeneticAlgorithm::mutationSwap()
 
 	for (Organism* o : fittestPopulation_) {
 		
-		for (int i = 0; i < 2; i++) {
+		// If mutation chance condition successful.
+		if (distrPopulation(engine) <= GLOBAL::MUTATION_CHANCE) {
 
-			if (distrPopulation(engine) <= GLOBAL::MUTATION_CHANCE) {
+			// Swap Mutation is carried out twice.
+			for (int i = 0; i < 2; i++) {
 
+				// Two random indexes chosen.
 				std::uniform_int_distribution<> distrSwap(0,5);
-				int index2 = distrSwap(engine);
 				int index = distrSwap(engine);
+				int index2 = distrSwap(engine);
 
+				// Values in the two indexes are swapped.
 				float temp = o->chromosome_[index];
 
 				o->chromosome_[index] = o->chromosome_[index2];
