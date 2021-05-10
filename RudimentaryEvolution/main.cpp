@@ -18,6 +18,9 @@ int main()
 	std::cout << "Generation Time in Seconds: ";
 	std::cin >> GENERATION_TIME_IN_SECONDS;
 	std::cout << "\n";
+	std::cout << "Population Survivors (% of population): ";
+	std::cin >> SURVIVOR_PERCENTAGE;
+	std::cout << "\n";
 	std::cout << "Selection Type (Roulette = 0) (Random = 1) (Tournament = 2): ";
 	std::cin >> SELECTION_TYPE;
 
@@ -34,11 +37,27 @@ int main()
 	std::cout << "Crossover Type (Uniform = 0) (Single-Point = 1) (Multi-Point = 2): ";
 	std::cin >> CROSSOVER_TYPE;
 	std::cout << "\n";
-	std::cout << "Mutation One Type (None = 0) (Swap = 1) (Scramble = 2) (Inversion = 3): ";
-	std::cin >> MUTATION_ONE_TYPE;
-	std::cout << "\n";
-	std::cout << "Mutation Two Type (Creep = 0) (Random Resetting = 1): ";
+	std::cout << "Primary Mutation Type (Creep = 0) (Random Resetting = 1): ";
 	std::cin >> MUTATION_TWO_TYPE;
+	std::cout << "\n";
+
+	if (MUTATION_TWO_TYPE == 0) {
+		std::cout << "Creep Value Range: ";
+		std::cin >> CREEP_RANGE;
+		std::cout << "\n";
+	}
+
+	if (MUTATION_TWO_TYPE == 1) {
+		std::cout << "Random Reset Lower Bound: ";
+		std::cin >> RAND_LOWER;
+		std::cout << "\n";
+		std::cout << "Random Reset Upper Bound: ";
+		std::cin >> RAND_UPPER;
+		std::cout << "\n";
+	}
+
+	std::cout << "Secondary Mutation Type (None = 0) (Swap = 1) (Scramble = 2) (Inversion = 3): ";
+	std::cin >> MUTATION_ONE_TYPE;
 	std::cout << "\n";
 	std::cout << "Mutation Chance Percentage (0.0f - 100.0f): ";
 	std::cin >> MUTATION_CHANCE;

@@ -1,6 +1,17 @@
 ﻿  Organism.cpp
+  EvolutionSimulation.cpp
+  GeneticAlgorithm.cpp
+C:\Users\dev\source\repos\dfoister\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\GeneticAlgorithm.cpp(447,36): warning C4244: '=': conversion from 'double' to '_Ty', possible loss of data
+          with
+          [
+              _Ty=float
+          ]
+C:\Users\dev\source\repos\dfoister\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\GeneticAlgorithm.cpp(470,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\dev\source\repos\dfoister\Rudimentary-Evolution-Dissertation\RudimentaryEvolution\GeneticAlgorithm.cpp(828,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  SimPhysics.cpp
+  main.cpp
   Generating code
-  1 of 1616 functions (<0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 1572 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     4 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

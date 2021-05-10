@@ -431,6 +431,23 @@ void GeneticAlgorithm::crossoverMultiPoint()
 
 void GeneticAlgorithm::mutationRandomResetting()
 {
+	std::random_device mutationRandom;
+	engine.seed(mutationRandom());
+
+	std::uniform_real_distribution<> distrPopulation(0.0f, 100.0f);
+
+	for (Organism* o : fittestPopulation_) {
+
+		// For each gene in the organism's chromosome
+		for (size_t i = 0; i < o->chromosome_.size(); i++) {
+			// If mutation chance condition successful.
+			if (distrPopulation(engine) <= GLOBAL::MUTATION_CHANCE) {
+				// Random value between chosen lower and upper bound assigned to gene.
+				std::uniform_real_distribution<> distrRandom(GLOBAL::RAND_LOWER, GLOBAL::RAND_UPPER);
+				o->chromosome_[i] = distrRandom(engine);
+			}
+		}
+	}
 }
 
 void GeneticAlgorithm::mutationCreep()
@@ -449,7 +466,7 @@ void GeneticAlgorithm::mutationCreep()
 			if (distrPopulation(engine) <= GLOBAL::MUTATION_CHANCE) {
 
 				// Random value between -15.0f & 15.0f added to gene.
-				std::uniform_real_distribution<> distrCreep(-20.0f, 20.0f);
+				std::uniform_real_distribution<> distrCreep(-GLOBAL::CREEP_RANGE, GLOBAL::CREEP_RANGE);
 				float creep = distrCreep(engine);
 
 				o->chromosome_[i] += creep;

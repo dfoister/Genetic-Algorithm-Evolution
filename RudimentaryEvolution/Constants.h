@@ -12,10 +12,15 @@ namespace GLOBAL
 	inline int TOURNAMENT_SIZE = 3;
 	inline int TOURNAMENT_SURVIVORS = 1;
 
+	inline int SURVIVOR_PERCENTAGE;
 	inline int SELECTION_TYPE;
 	inline int CROSSOVER_TYPE;
 	inline int MUTATION_ONE_TYPE;
 	inline int MUTATION_TWO_TYPE;
+
+	inline float CREEP_RANGE;
+	inline float RAND_LOWER;
+	inline float RAND_UPPER;
 	
 	inline float MUTATION_CHANCE;
 

@@ -179,16 +179,17 @@ void SimPhysics::collisionResolution(float dt)
 		a->pos_ -= pair->getNormal() * pair->getPenetration() * (massA / totalMass);
 		b->pos_ += pair->getNormal() * pair->getPenetration() * (massB / totalMass);
 
-
+		// Relative velocity calculation
 		Vector2f relativeVelocity = a->velocity_ - b->velocity_;
-		float relativeVelDotCollisionNormal = relativeVelocity.dot(pair->getNormal());
+		// Dot product of relative velocity and the collision normal.
+		float dotRelativeVelocityAndCollisionNormal = relativeVelocity.dot(pair->getNormal());
 		float coefficientOfRestitution = 0.8f;
 
-		float j = (-(1 + coefficientOfRestitution) * relativeVelDotCollisionNormal) / totalMass;
+		// Impulse calculation
+		float j = (-(1 + coefficientOfRestitution) * dotRelativeVelocityAndCollisionNormal) / totalMass;
 
-		a->addImpulse(a->velocity_ + massA * j * pair->getNormal());
-		b->addImpulse(b->velocity_ - massB * j * pair->getNormal());
-
+		a->velocity_ += massA * j * pair->getNormal();
+		b->velocity_ -= massB * j * pair->getNormal();
 		}
 
 	}
