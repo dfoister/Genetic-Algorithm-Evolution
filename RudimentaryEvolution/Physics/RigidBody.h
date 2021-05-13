@@ -60,10 +60,13 @@ public:
 	void consumedFoodPoison(std::string type) {
 
 			if (type == "FOOD") {
-				currentHealth_ += 25;
+				currentHealth_ += 25.0f;
+			}
+			else if (type == "POISON") {
+				currentHealth_ -= 40.0f;
 			}
 			else {
-				currentHealth_ -= 40;
+				currentHealth_ += 25.0f;
 			}
 
 	}

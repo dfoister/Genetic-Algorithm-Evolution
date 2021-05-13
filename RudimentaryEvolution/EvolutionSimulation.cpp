@@ -16,7 +16,7 @@ EvolutionSimulation::EvolutionSimulation(Rendering* r)
 	physics_ = new SimPhysics();
 	renderer_ = r;
 	generation_ = -1;
-	InitialiseGame();
+	InitialiseSim();
 	CreateWallColliders();
 }
 
@@ -39,15 +39,15 @@ void EvolutionSimulation::update(float dt)
 {
 	renderer_->DrawText(sf::Vector2f(10, 10), "Generation: " + std::to_string(generation_));
 	for (auto i : newObjects_) {
-		gameObjects_.emplace_back(i);
+		simObjects_.emplace_back(i);
 	}
 	newObjects_.clear();
 
-	gameTime_ += dt;
+	simTime_ += dt;
 	physics_->update(dt);
 
 
-	for (auto i = gameObjects_.begin(); i != gameObjects_.end(); ) {
+	for (auto i = simObjects_.begin(); i != simObjects_.end(); ) {
 		if (!(*i)->updateObject(dt)) { //object has said its finished with
 			
 			if ((*i)->getCollider()->getName() == "FOOD") {
@@ -69,7 +69,7 @@ void EvolutionSimulation::update(float dt)
 			physics_->removeCollider((*i)->getCollider());
 			physics_->removeBody((*i));
 			
-			i = gameObjects_.erase(i);
+			i = simObjects_.erase(i);
 		}
 		else {
 
@@ -77,7 +77,7 @@ void EvolutionSimulation::update(float dt)
 
 				Organism* o = dynamic_cast<Organism*>(*i);
 				o->lifetime_ += dt;
-				for (auto object : gameObjects_) {
+				for (auto object : simObjects_) {
 					if (object->getCollider()->colliderType_ == Collider::Types::FOOD) {
 
 						Food* f = dynamic_cast<Food*>(object);
@@ -114,6 +114,7 @@ void EvolutionSimulation::update(float dt)
 				}
 				else if(col->getName() == "ORGANISM"){
 					renderer_->DrawOrganism(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getRadius(), col->getColour());
+					//renderer_->DrawText(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), std::to_string(col->getObject()->getHealth()));
 				}
 				else {
 					renderer_->DrawBox(sf::Vector2f(col->getPosition().x(), col->getPosition().y()), col->getWidth(), col->getHeight(), col->getColour());
@@ -130,14 +131,11 @@ void EvolutionSimulation::update(float dt)
 
 }
 
-void EvolutionSimulation::InitialiseGame()
+void EvolutionSimulation::InitialiseSim()
 {
-	GeneticAlgorithm* g = new GeneticAlgorithm();
-
-	g->mutationCreepTest();
 
 	generation_ += 1;
-	for (auto i = gameObjects_.begin(); i != gameObjects_.end(); ) {
+	for (auto i = simObjects_.begin(); i != simObjects_.end(); ) {
 		if ((*i)->getCollider()->getName() == "ORGANISM") {
 			Organism* o = dynamic_cast<Organism*>(*i);
 			oldOrganisms_.emplace_back(o);
@@ -147,9 +145,9 @@ void EvolutionSimulation::InitialiseGame()
 		}
 		physics_->removeCollider((*i)->getCollider());
 		physics_->removeBody((*i));
-		i = gameObjects_.erase(i);
+		i = simObjects_.erase(i);
 	}
-	gameObjects_.clear();
+	simObjects_.clear();
 
 	
 
@@ -178,17 +176,15 @@ void EvolutionSimulation::InitialiseGame()
 
 		GeneticAlgorithm* GA = new GeneticAlgorithm(oldOrganisms_);	
 		std::vector<Organism*> newOrganisms = GA->createNewPopulation();
-		std::cout << newOrganisms.size();
 		for (Organism* o : newOrganisms) {
 			addNewObject(o);
-			std::cout << o->getBaseHealth();
 		}
 		oldOrganisms_.clear();
 	}
 
 	CreateWallColliders();
 
-	gameTime_ = 0;
+	simTime_ = 0;
 
 }
 

@@ -169,19 +169,15 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 				if (position_.x() < col->getPosition().x()) {
 					xPenetration = -1 * ((position_.x() + width_ / 2) - (col->getPosition().x() - col->getWidth() / 2));
 				}
-
 				else if (position_.x() > col->getPosition().x()) {
 					xPenetration = ((col->getPosition().x() + col->getWidth() / 2) - (position_.x() - width_ / 2));
 				}
-
 				if (position_.y() < col->getPosition().y()) {
 					yPenetration = -1 * ((position_.y() + height_ / 2) - (col->getPosition().y() - col->getHeight() / 2));
 				}
-
 				else if (position_.y() > col->getPosition().y()) {
 					yPenetration = ((col->getPosition().y() + col->getHeight() / 2) - (position_.y() - height_ / 2));
 				}
-
 				if (abs(xPenetration) < abs(yPenetration)) {
 					normal_ = Vector2f(0, 1);
 					penetration = xPenetration;
@@ -264,11 +260,14 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 
 
 			Vector2f halfBox = Vector2f(width_ / 2, height_ / 2);
+			// Line vector between centre of both shapes.
 			Vector2f delta = col->getPosition() - position_;
 
+			// Clamp circle axes to min/max extent of the rectangle
 			float closestX = std::clamp(delta.x(), -halfBox.x(), halfBox.x());
 			float closestY = std::clamp(delta.y(), -halfBox.y(), halfBox.y());
 			Vector2f closestPoint = Vector2f(closestX, closestY);
+
 
 			Vector2f localPoint = delta - closestPoint;
 
@@ -276,10 +275,8 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 
 			if (distance < col->getRadius()) {
 				Vector2f normal_ = Vec2Operations::normalized(localPoint);
-				Vector2f normalReversed = Vector2f(-normal_.y(), normal_.x());
 				float penetration = (col->getRadius() - distance);
 
-				//std::cout << penetration << "  +  " << normal_ << "\n";
 				return std::make_tuple(true, penetration, -normal_);
 			}
 			return std::make_tuple(false, 0.0f, Vector2f(0, 0));
@@ -293,16 +290,23 @@ std::tuple<bool, float, Vector2f> Collider::isCollided(Collider* col)
 
 		if (col->getShape() == Collider::Shapes::CIRCLE) {
 
+			
 			float radii = radius_ + col->getRadius();
+
+			// Line between the centers of the two circles.
 			Vector2f delta = (col->getPosition() - position_);
+			// The distance between the two centers
 			float deltaLength = Vec2Operations::length(delta);
 
+			// If the distance between the two centers is less than the combined radii.
 			if (deltaLength < radii) {
 
+				// The difference between the radii and distance between 
+				// is the penetration distance
 				float pen = (radii - deltaLength);
+				// The normal is the direction of the line between the two centers.
 				Vector2f normal_ = Vec2Operations::normalized(delta);
 				return std::make_tuple(true, pen, normal_);
-
 			}
 			else {
 				return std::make_tuple(false, 0.0f, Vector2f(0, 0));

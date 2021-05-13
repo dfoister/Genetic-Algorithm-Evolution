@@ -101,7 +101,7 @@ int main()
 
 		}
 		else {
-			sim->InitialiseGame();
+			sim->InitialiseSim();
 			cycle = 0.0f;
 		}
 		

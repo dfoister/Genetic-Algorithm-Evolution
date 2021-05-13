@@ -82,16 +82,24 @@ void SimPhysics::collisionDetection(float dt) {
 			Vector2f normal;
 
 			// isCollided returns true/false, penetration amount and normal vector.
-			std::tie(result, penetration, normal) = allColliders_[i]->isCollided(allColliders_[j]);
 
-			if (result == true) {  // If collided
+			if (!(allColliders_[i]->colliderType_ == Collider::Types::WALL && allColliders_[j]->colliderType_ == Collider::Types::WALL)) {
+				std::tie(result, penetration, normal) = allColliders_[i]->isCollided(allColliders_[j]);
 
-				CollisionPair* temp = new CollisionPair(allColliders_[i], allColliders_[j], penetration, normal);
 
-				// Adds the collision pair to a list
-				collisionList_.push_back(temp);
+				if (result == true) {  // If collided
 
+					CollisionPair* temp = new CollisionPair(allColliders_[i], allColliders_[j], penetration, normal);
+
+					// Adds the collision pair to a list
+					collisionList_.push_back(temp);
+
+				}
 			}
+
+			
+
+
 
 		}
 	}
@@ -158,6 +166,10 @@ void SimPhysics::collisionResolution(float dt)
 
 	for (CollisionPair* pair : collisionList_) {
 
+		std::cout << "Collision: (" << pair->getCollisionA()->getName() <<
+			", Position: " << pair->getCollisionA()->getPosition().x() << "," << pair->getCollisionA()->getPosition().y()
+			<< ") + (" << pair->getCollisionB()->getName() << ", Position: " << pair->getCollisionB()->getPosition().x() << "," << pair->getCollisionA()->getPosition().y() << ")"
+			<< " Normal: " << "(" << pair->getNormal().x() << "," << pair->getNormal().y() << ") Penetration: " << pair->getPenetration() << "\n";
 
 		if ((pair->getCollisionA()->getName() == "FOOD" || pair->getCollisionA()->getName() == "POISON") && pair->getCollisionB()->getName() == "ORGANISM") {
 			pair->getCollisionB()->getObject()->consumedFoodPoison(pair->getCollisionA()->getName()); 
@@ -168,6 +180,9 @@ void SimPhysics::collisionResolution(float dt)
 			pair->getCollisionB()->getObject()->isConsumed_ = 1;
 		}
 		else {
+
+
+
 
 		RigidBody* a = pair->getCollisionA()->getObject();
 		RigidBody* b = pair->getCollisionB()->getObject();

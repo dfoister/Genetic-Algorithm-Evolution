@@ -16,17 +16,17 @@ public:
 		
 	void update(float dt);
 	void addNewObject(BaseObject* object);
-	void InitialiseGame();
+	void InitialiseSim();
 protected:
 
 	void CreateWallColliders();
 
 	SimPhysics* physics_;
 	Rendering* renderer_;
-	float gameTime_;
+	float simTime_;
 	int generation_;
 
-	std::vector<BaseObject*> gameObjects_;
+	std::vector<BaseObject*> simObjects_;
 	std::vector<BaseObject*> newObjects_;
 	std::vector<Organism*> oldOrganisms_;
 };

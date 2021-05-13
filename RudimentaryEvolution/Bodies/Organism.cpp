@@ -66,6 +66,8 @@ Organism::Organism(std::vector<float> chromosome):Organism()
 	poisonRadius_ = chromosome.at(5);
 	currentHealth_ = baseHealth_;
 
+	chromosome_.clear();
+
 	chromosome_.emplace_back(normalSpeed_);
 	chromosome_.emplace_back(foodPoisonImpulse_);
 	chromosome_.emplace_back(bodySize_);

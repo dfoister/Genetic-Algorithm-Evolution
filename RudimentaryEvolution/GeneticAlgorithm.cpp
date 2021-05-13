@@ -57,20 +57,41 @@ float GeneticAlgorithm::getFitness(Organism* o)
 
 void GeneticAlgorithm::computePopulationFitness()
 {
-	std::sort(population_.begin(), population_.end(), [](Organism* o1, Organism* o2) { return o1->getHealth()+o1->getLifetime() < o2->getHealth() + o2->getLifetime(); });
-/*
-	for (Organism* o : population_) {
-		std::cout << "Chromosome 1: ";
+	//std::sort(population_.begin(), population_.end(), [](Organism* o1, Organism* o2) { return o1->getHealth()+o1->getLifetime() < o2->getHealth() + o2->getLifetime(); });
 
-		for (float g : o->chromosome_) {
-			std::cout << g << ", ";
+	std::vector<float> fitnessList;
+	float totalFitness;
+	float bestFitness;
+	float avgFitness;
+
+	for (size_t i = 0; i < population_.size(); i++) {
+
+		std::cout << "Organism " << i+1 << ": ";
+
+		for (float g : population_[i]->chromosome_) {
+			std::cout << g << " ";
 		}
-		std::cout << "\n";
 
+		float fitness = population_[i]->getHealth() + population_[i]->getLifetime();
+
+		std::cout << "Fitness: " << fitness << "\n";
+
+		fitnessList.emplace_back(fitness);
+		totalFitness += fitness;
 
 	}
-	std::cout << "\n\n\n\n\n\n";
-	*/
+
+	std::sort(fitnessList.begin(), fitnessList.end());
+
+	bestFitness = fitnessList.back();
+	avgFitness = totalFitness / population_.size();
+
+	std::cout << "Best Fitness: " << bestFitness << "\n";
+	std::cout << "Avg  Fitness: " << avgFitness << "\n";
+
+	std::cout << "========================================================================================" << "\n\n";
+
+
 }
 
 void GeneticAlgorithm::selectionProcess()
@@ -91,7 +112,6 @@ void GeneticAlgorithm::selectionProcess()
 		fittestPopulation_[i]->setChromosome(tempChromosome);
 
 	}
-
 	
 }
 
@@ -104,7 +124,7 @@ void GeneticAlgorithm::crossoverProcess()
 		
 	int temp = 0;
 
-	for (int i = 0; i < static_cast <int>(fittestPopulation_.size()); i++) {
+	for (size_t i = 0; i < fittestPopulation_.size(); i++) {
 		
 		if (temp == 1) {
 			temp = 0;
@@ -155,8 +175,6 @@ void GeneticAlgorithm::selectionRouletteWheel()
 	for (Organism* i : population_) {
 		totalFitness += getFitness(i);
 	}
-	
-	std::cout << "Total Fitness: " << totalFitness << "\n";
 
 	std::uniform_real_distribution<> distrWheel(0.0f, totalFitness);
 	
@@ -176,8 +194,6 @@ void GeneticAlgorithm::selectionRouletteWheel()
 				}
 			}
 	}
-
-	std::cout << "New Population Size: " << fittestPopulation_.size() << "\n";
 }
 
 void GeneticAlgorithm::selectionTournament()
@@ -189,7 +205,7 @@ void GeneticAlgorithm::selectionTournament()
 		std::vector<Organism*> competitors;
 
 		// Adds N random competitors to list, where N is GLOBAL::TOURNAMENT_SIZE
-		for (int j = 0; j < GLOBAL::TOURNAMENT_SIZE; i++) {	
+		for (int j = 0; j < GLOBAL::TOURNAMENT_SIZE; j++) {	
 			competitors.emplace_back(population_[distrPopulation(engine)]);
 		}
 
@@ -212,14 +228,14 @@ void GeneticAlgorithm::selectionRandom()
 {
 	std::vector<int> numbers;
 
-	for (int i = 0; i < 20; i++)      
+	for (int i = 0; i < GLOBAL::POPULATION_SIZE; i++)      
 		numbers.push_back(i);
 
 	std::random_device rand;
 	std::shuffle(numbers.begin(), numbers.end(), std::default_random_engine(rand()));
 
-	for (int i = 0; i < GLOBAL::SURVIVORS; i++) {
-		fittestPopulation_.emplace_back(population_[numbers[i]]);
+	for (int j = 0; j < GLOBAL::POPULATION_SIZE/2; j++) {
+		fittestPopulation_.emplace_back(population_[numbers[j]]);
 	}
 
 }
@@ -237,20 +253,6 @@ void GeneticAlgorithm::crossoverUniform()
 		std::vector<float> o1Chromosome;
 		std::vector<float> o2Chromosome;
 
-		std::cout << "Chromosome 1: ";
-
-		for (float g : o1->chromosome_) {
-			std::cout << g << ", ";
-		}
-
-		std::cout << "\nChromosome 2: ";
-
-		for (float g : o2->chromosome_) {
-			std::cout << g << ", ";
-		}
-
-		std::cout << "\n";
-
 		for (int i = 0; i < 6; i++) {
 
 			
@@ -265,20 +267,7 @@ void GeneticAlgorithm::crossoverUniform()
 				o2Chromosome.emplace_back(o2->getChromosome().at(i));
 			}
 		}
-		
-		std::cout << "\nChromosome 3: ";
 
-		for (float g : o1Chromosome) {
-			std::cout << g << ", ";
-		}
-
-		std::cout << "\nChromosome 4: ";
-
-		for (float g : o2Chromosome) {
-			std::cout << g << ", ";
-		}
-
-		std::cout << "\n\n";
 		
 
 		fittestPopulation_.emplace_back(new Organism(o1Chromosome));
@@ -305,19 +294,6 @@ for (matingPair mp : matingPairs) {
 	std::vector<float> o1Chromosome;
 	std::vector<float> o2Chromosome;
 
-	std::cout << "Chromosome 1: ";
-
-	for (float g : o1->chromosome_) {
-		std::cout << g << ", ";
-	}
-
-	std::cout << "\nChromosome 2: ";
-
-	for (float g : o2->chromosome_) {
-		std::cout << g << ", ";
-	}
-
-	std::cout << "\n";
 
 	for (int i = 0; i < randomPop; i++) {
 
@@ -331,21 +307,6 @@ for (matingPair mp : matingPairs) {
 		o2Chromosome.emplace_back(o1->getChromosome().at(i));
 	}
 
-
-
-	std::cout << "\nChromosome 3: ";
-
-	for (float g : o1Chromosome) {
-		std::cout << g << ", ";
-	}
-
-	std::cout << "\nChromosome 4: ";
-
-	for (float g : o2Chromosome) {
-		std::cout << g << ", ";
-	}
-
-	std::cout << "\n\n";
 
 	fittestPopulation_.emplace_back(new Organism(o1Chromosome));
 	fittestPopulation_.emplace_back(new Organism(o2Chromosome));
@@ -378,19 +339,6 @@ void GeneticAlgorithm::crossoverMultiPoint()
 		std::vector<float> o1Chromosome;
 		std::vector<float> o2Chromosome;
 
-		std::cout << "Chromosome 1: ";
-
-		for (float g : o1->chromosome_) {
-			std::cout << g << ", ";
-		}
-
-		std::cout << "\nChromosome 2: ";
-
-		for (float g : o2->chromosome_) {
-			std::cout << g << ", ";
-		}
-
-		std::cout << "\n";
 
 		for (int i = 0; i < numbers2.at(0); i++) {
 
@@ -409,20 +357,6 @@ void GeneticAlgorithm::crossoverMultiPoint()
 			o2Chromosome.emplace_back(o2->getChromosome().at(i));
 		}
 
-
-		std::cout << "\nChromosome 3: ";
-
-		for (float g : o1Chromosome) {
-			std::cout << g << ", ";
-		}
-
-		std::cout << "\nChromosome 4: ";
-
-		for (float g : o2Chromosome) {
-			std::cout << g << ", ";
-		}
-
-		std::cout << "\n\n";
 
 		fittestPopulation_.emplace_back(new Organism(o1Chromosome));
 		fittestPopulation_.emplace_back(new Organism(o2Chromosome));
@@ -842,6 +776,56 @@ void GeneticAlgorithm::mutationCreepTest()
 		}
 
 	}
+}
+
+
+
+void GeneticAlgorithm::mutationRandomResettingTest()
+{
+	std::random_device mutationRandom;
+	engine.seed(mutationRandom());
+
+	std::uniform_real_distribution<> distrPopulation(0.0f, 100.0f);
+
+
+	std::vector<Organism*> fitpop(10);
+
+	for (size_t i = 0; i < fitpop.size(); i++) {
+
+		fitpop[i] = new Organism();
+		std::cout << "\nChromosome " << i << ": ";
+		for (float g : fitpop[i]->chromosome_) {
+			std::cout << g << ", ";
+		}
+
+
+	}
+
+	std::cout << "\n";
+
+
+	for (Organism* o : fitpop) {
+
+		// For each gene in the organism's chromosome
+		for (size_t i = 0; i < o->chromosome_.size(); i++) {
+			// If mutation chance condition successful.
+			if (distrPopulation(engine) <= GLOBAL::MUTATION_CHANCE) {
+				// Random value between chosen lower and upper bound assigned to gene.
+				std::uniform_real_distribution<> distrRandom(GLOBAL::RAND_LOWER, GLOBAL::RAND_UPPER);
+				o->chromosome_[i] = distrRandom(engine);
+			}
+		}
+	}
+
+	for (size_t i = 0; i < fitpop.size(); i++) {
+
+		std::cout << "\nChromosome " << i << ": ";
+		for (float g : fitpop[i]->chromosome_) {
+			std::cout << g << ", ";
+		}
+
+	}
+
 }
 
 
